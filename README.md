@@ -1,1 +1,92 @@
-# .github-private
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshDine | Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="images/freshdine_logo.png" alt="Fresh Dine Logo" width="120">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#mealplans">Meal Plans</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <h1>Eat Better, Live Healthier</h1>
+      <p>Your personalized meal planning & ingredient delivery solution</p>
+      <a href="#mealplans" class="cta-button">Explore Meal Plans</a>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>1. Choose Your Plan</h3>
+          <p>Select meal plans tailored to your taste & lifestyle.</p>
+        </div>
+        <div class="step">
+          <h3>2. We Deliver</h3>
+          <p>Get fresh, pre-portioned ingredients at your doorstep.</p>
+        </div>
+        <div class="step">
+          <h3>3. Cook & Enjoy</h3>
+          <p>Follow simple recipes and enjoy your meals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Meal Plans -->
+    <section id="mealplans" class="meal-plans">
+      <h2>Popular Meal Plans</h2>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <img src="images/vegan_plan.jpg" alt="Vegan Plan">
+          <h3>Vegan Delights</h3>
+        </div>
+        <div class="plan-card">
+          <img src="images/protein_plan.jpg" alt="Protein Rich Plan">
+          <h3>Protein Rich</h3>
+        </div>
+        <div class="plan-card">
+          <img src="images/mixed_plan.jpg" alt="Balanced Plan">
+          <h3>Balanced Everyday</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+      <h2>What Our Users Say</h2>
+      <blockquote>
+        "FreshDine saved me time and brought joy back to cooking after work!"
+        <footer>— Denzel, Student</footer>
+      </blockquote>
+      <blockquote>
+        "No more grocery lines! My family loves the variety."
+        <footer>— Michelle, Working Professional</footer>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <p>&copy; 2025 FreshDine | <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
+    <p>Email: info@freshdine.com</p>
+  </footer>
+
+</body>
+</html>

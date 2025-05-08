@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshDine | Recipe Discovery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Discover Recipes</h1>
+  </header>
+
+  <main>
+    <!-- Filters -->
+    <section class="filters">
+      <h2>Filter Recipes</h2>
+      <form>
+        <label for="diet">Dietary Restriction:</label>
+        <select id="diet" name="diet">
+          <option value="all">All</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="halal">Halal</option>
+          <option value="glutenfree">Gluten-Free</option>
+        </select>
+
+        <label for="cuisine">Cuisine Type:</label>
+        <select id="cuisine" name="cuisine">
+          <option value="all">All</option>
+          <option value="italian">Italian</option>
+          <option value="asian">Asian</option>
+          <option value="african">African</option>
+          <option value="mexican">Mexican</option>
+        </select>
+
+        <input type="submit" value="Apply Filters">
+      </form>
+    </section>
+
+    <!-- Recipe Cards -->
+    <section class="recipes">
+      <h2>Available Recipes</h2>
+      <div class="recipe-grid">
+        <div class="recipe-card">
+          <img src="images/jollof_rice.jpg" alt="Jollof Rice">
+          <h3>Nigerian Jollof Rice</h3>
+          <p>Calories: 450 | Protein: 9g | Carbs: 70g | Fat: 12g</p>
+          <button>Add to Meal Plan</button>
+        </div>
+
+        <div class="recipe-card">
+          <img src="images/paneer_curry.jpg" alt="Paneer Curry">
+          <h3>Indian Paneer Curry</h3>
+          <p>Calories: 400 | Protein: 15g | Carbs: 25g | Fat: 18g</p>
+          <button>Add to Meal Plan</button>
+        </div>
+
+        <div class="recipe-card">
+          <img src="images/vegan_bowl.jpg" alt="Vegan Bowl">
+          <h3>Vegan Buddha Bowl</h3>
+          <p>Calories: 380 | Protein: 12g | Carbs: 40g | Fat: 14g</p>
+          <button>Add to Meal Plan</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FreshDine. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshDine | Meal Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Weekly Meal Planner</h1>
+</header>
+
+<main>
+  <!-- Calendar Table -->
+  <section class="meal-calendar">
+    <h2>Your Meal Plan</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Breakfast</th>
+          <th>Lunch</th>
+          <th>Dinner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td class="droppable" id="mon-breakfast"></td>
+          <td class="droppable" id="mon-lunch"></td>
+          <td class="droppable" id="mon-dinner"></td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td class="droppable" id="tue-breakfast"></td>
+          <td class="droppable" id="tue-lunch"></td>
+          <td class="droppable" id="tue-dinner"></td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td class="droppable" id="wed-breakfast"></td>
+          <td class="droppable" id="wed-lunch"></td>
+          <td class="droppable" id="wed-dinner"></td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td class="droppable" id="thu-breakfast"></td>
+          <td class="droppable" id="thu-lunch"></td>
+          <td class="droppable" id="thu-dinner"></td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td class="droppable" id="fri-breakfast"></td>
+          <td class="droppable" id="fri-lunch"></td>
+          <td class="droppable" id="fri-dinner"></td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td class="droppable" id="sat-breakfast"></td>
+          <td class="droppable" id="sat-lunch"></td>
+          <td class="droppable" id="sat-dinner"></td>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td class="droppable" id="sun-breakfast"></td>
+          <td class="droppable" id="sun-lunch"></td>
+          <td class="droppable" id="sun-dinner"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Nutritional Summary -->
+  <section class="nutrition-summary">
+    <h2>Weekly Nutrition Summary</h2>
+    <p>Calories: <span id="calories">0</span> kcal</p>
+    <p>Protein: <span id="protein">0</span> g</p>
+    <p>Carbohydrates: <span id="carbs">0</span> g</p>
+    <p>Fat: <span id="fat">0</span> g</p>
+  </section>
+
+  <!-- Shopping Cart -->
+  <section class="shopping-cart">
+    <h2>Your Shopping Cart</h2>
+    <ul id="cart-items">
+      <li>No items yet</li>
+    </ul>
+    <button>Checkout</button>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 FreshDine. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

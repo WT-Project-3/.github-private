@@ -8,68 +8,108 @@
 </head>
 <body>
 
-  <header>
-    <h1>Discover Recipes</h1>
-  </header>
+<header>
+  <h1>Discover Delicious Recipes</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="meal-planner.html">Meal Planner</a>
+    <a href="profile-creation.html">Profile</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
+</header>
 
-  <main>
-    <!-- Filters -->
-    <section class="filters">
-      <h2>Filter Recipes</h2>
-      <form>
-        <label for="diet">Dietary Restriction:</label>
-        <select id="diet" name="diet">
-          <option value="all">All</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="halal">Halal</option>
-          <option value="glutenfree">Gluten-Free</option>
-        </select>
+<main>
+  <section class="recipe-grid">
+    <article class="recipe-card">
+      <img src="images/jollof-rice-placeholder.jpg" alt="Jollof Rice">
+      <h2>Jollof Rice</h2>
+      <p>Spicy West African rice dish cooked in a flavorful tomato sauce with chicken thighs.</p>
+      <ul class="nutrition">
+        <li>Calories: 520</li>
+        <li>Protein: 9g</li>
+        <li>Carbs: 70g</li>
+        <li>Fat: 18g</li>
+      </ul>
+    </article>
 
-        <label for="cuisine">Cuisine Type:</label>
-        <select id="cuisine" name="cuisine">
-          <option value="all">All</option>
-          <option value="italian">Italian</option>
-          <option value="asian">Asian</option>
-          <option value="african">African</option>
-          <option value="mexican">Mexican</option>
-        </select>
+    <article class="recipe-card">
+      <img src="images/paneer-butter-placeholder.jpg" alt="Paneer Butter Masala">
+      <h2>Paneer Butter Masala</h2>
+      <p>Rich and creamy Indian curry made with paneer, butter, and a spiced tomato sauce.</p>
+      <ul class="nutrition">
+        <li>Calories: 430</li>
+        <li>Protein: 14g</li>
+        <li>Carbs: 22g</li>
+        <li>Fat: 32g</li>
+      </ul>
+    </article>
 
-        <input type="submit" value="Apply Filters">
-      </form>
-    </section>
+    <article class="recipe-card">
+      <img src="images/spaghetti-carbonara-placeholder.jpg" alt="Spaghetti Carbonara">
+      <h2>Spaghetti Carbonara</h2>
+      <p>Classic Italian pasta with pancetta, eggs, and Parmesan cheese.</p>
+      <ul class="nutrition">
+        <li>Calories: 570</li>
+        <li>Protein: 21g</li>
+        <li>Carbs: 60g</li>
+        <li>Fat: 28g</li>
+      </ul>
+    </article>
 
-    <!-- Recipe Cards -->
-    <section class="recipes">
-      <h2>Available Recipes</h2>
-      <div class="recipe-grid">
-        <div class="recipe-card">
-          <img src="images/jollof_rice.jpg" alt="Jollof Rice">
-          <h3>Nigerian Jollof Rice</h3>
-          <p>Calories: 450 | Protein: 9g | Carbs: 70g | Fat: 12g</p>
-          <button>Add to Meal Plan</button>
-        </div>
+    <article class="recipe-card">
+      <img src="images/vegetarian-tacos-placeholder.jpg" alt="Vegetarian Tacos">
+      <h2>Vegetarian Tacos</h2>
+      <p>Flavorful tacos filled with black beans, avocado, lettuce, and cheese.</p>
+      <ul class="nutrition">
+        <li>Calories: 400</li>
+        <li>Protein: 13g</li>
+        <li>Carbs: 40g</li>
+        <li>Fat: 18g</li>
+      </ul>
+    </article>
 
-        <div class="recipe-card">
-          <img src="images/paneer_curry.jpg" alt="Paneer Curry">
-          <h3>Indian Paneer Curry</h3>
-          <p>Calories: 400 | Protein: 15g | Carbs: 25g | Fat: 18g</p>
-          <button>Add to Meal Plan</button>
-        </div>
+    <article class="recipe-card">
+      <img src="images/bibimbap-placeholder.jpg" alt="Bibimbap">
+      <h2>Bibimbap</h2>
+      <p>Traditional Korean rice bowl with veggies, tofu, and spicy gochujang.</p>
+      <ul class="nutrition">
+        <li>Calories: 480</li>
+        <li>Protein: 17g</li>
+        <li>Carbs: 52g</li>
+        <li>Fat: 20g</li>
+      </ul>
+    </article>
 
-        <div class="recipe-card">
-          <img src="images/vegan_bowl.jpg" alt="Vegan Bowl">
-          <h3>Vegan Buddha Bowl</h3>
-          <p>Calories: 380 | Protein: 12g | Carbs: 40g | Fat: 14g</p>
-          <button>Add to Meal Plan</button>
-        </div>
-      </div>
-    </section>
-  </main>
+    <article class="recipe-card">
+      <img src="images/mapo-tofu-placeholder.jpg" alt="Mapo Tofu">
+      <h2>Mapo Tofu</h2>
+      <p>Spicy Sichuan dish with silken tofu, chili bean paste, and peppercorns.</p>
+      <ul class="nutrition">
+        <li>Calories: 390</li>
+        <li>Protein: 15g</li>
+        <li>Carbs: 18g</li>
+        <li>Fat: 28g</li>
+      </ul>
+    </article>
 
-  <footer>
-    <p>&copy; 2025 FreshDine. All rights reserved.</p>
-  </footer>
+    <article class="recipe-card">
+      <img src="images/cheeseburger-placeholder.jpg" alt="Classic Cheeseburger">
+      <h2>Classic Cheeseburger</h2>
+      <p>Juicy grilled beef patty topped with cheddar, lettuce, tomato, and onion.</p>
+      <ul class="nutrition">
+        <li>Calories: 650</li>
+        <li>Protein: 28g</li>
+        <li>Carbs: 38g</li>
+        <li>Fat: 40g</li>
+      </ul>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 FreshDine. All rights reserved.</p>
+  <p><a href="https://www.freshdine.com">Visit Full Website</a></p>
+</footer>
 
 </body>
 </html>

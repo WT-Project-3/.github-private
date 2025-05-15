@@ -1,21 +1,98 @@
-<!-- Checkout/Delivery Page -->
-<!-- checkout.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Checkout - FreshDine</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshDine | Checkout</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header><h1>Checkout & Delivery</h1></header>
-<main>
-  <form>
-    <input type="text" placeholder="Shipping Address"><br>
-    <input type="text" placeholder="City"><br>
-    <input type="text" placeholder="Postal Code"><br>
-    <input type="submit" value="Place Order">
-  </form>
+
+<header>
+  <div class="logo">
+    <img src="images/freshdine_logo.png" alt="FreshDine Logo" width="120">
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="recipe-discovery.html">Recipes</a>
+    <a href="meal-planner.html">Meal Planner</a>
+    <a href="profile-creation.html">Profile</a>
+  </nav>
+</header>
+
+<main class="checkout-page">
+  <h1>Checkout</h1>
+  
+  <div class="checkout-container">
+    <!-- Cart Summary -->
+    <section class="cart-summary">
+      <h2>Your Cart</h2>
+      <div class="cart-item">
+        <img src="images/jollof-rice.jpg" alt="Jollof Rice">
+        <div>
+          <h3>Nigerian Jollof Rice</h3>
+          <p>Quantity: 2</p>
+          <p>Price: €24.00</p>
+        </div>
+      </div>
+      <div class="cart-item">
+        <img src="images/spaghetti-carbonara.jpg" alt="Spaghetti Carbonara">
+        <div>
+          <h3>Spaghetti Carbonara</h3>
+          <p>Quantity: 1</p>
+          <p>Price: €12.00</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Delivery Information -->
+    <section class="delivery-info">
+      <h2>Delivery Information</h2>
+      <form>
+        <label>Full Name:</label>
+        <input type="text" placeholder="John Doe">
+        
+        <label>Address:</label>
+        <input type="text" placeholder="Street, City, ZIP">
+
+        <label>Preferred Delivery Date:</label>
+        <input type="date">
+
+        <label>Preferred Time Slot:</label>
+        <select>
+          <option>Morning (8am - 11am)</option>
+          <option>Afternoon (12pm - 3pm)</option>
+          <option>Evening (5pm - 8pm)</option>
+        </select>
+      </form>
+    </section>
+
+    <!-- Billing Info & Order Summary -->
+    <section class="billing-summary">
+      <h2>Billing Information</h2>
+      <form>
+        <label>Payment Method:</label>
+        <select>
+          <option>Credit Card</option>
+          <option>PayPal</option>
+          <option>Bank Transfer</option>
+        </select>
+      </form>
+
+      <h2>Order Summary</h2>
+      <p>Subtotal: €36.00</p>
+      <p>Delivery Fee: €5.00</p>
+      <p><strong>Total: €41.00</strong></p>
+
+      <button class="btn-primary">Place Order</button>
+    </section>
+  </div>
 </main>
+
+<footer>
+  <p>&copy; 2025 FreshDine | <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
+</footer>
+
 </body>
 </html>
+

@@ -83,13 +83,39 @@ section h2 {
   margin-bottom: 40px;
   color: #2c3e50;
 }
-
-/* ===== Recipe Grid ===== */
 .recipe-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
   padding: 20px;
+}
+
+.recipe-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ===== Recipe Grid ===== */
+.recipe-card {
+  width: 320px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  background-color: white;
+  margin: 10px;
+  text-align: center;
 }
 
 .recipe-card {

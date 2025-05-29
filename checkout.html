@@ -2,97 +2,342 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Checkout | FreshDine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshDine | Checkout</title>
-  <link rel="stylesheet" href="freshdine.css">
+  <!-- Google Fonts for nice look -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600,400&display=swap">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #f7f7fb;
+      margin: 0;
+    }
+    .checkout-header {
+      background: #244987;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 38px;
+    }
+    .checkout-logo img { height: 38px; }
+    .checkout-cart-link { color: #fff; text-decoration: underline; font-size: 1.04rem;}
+    .checkout-main {
+      display: flex;
+      max-width: 1200px;
+      margin: 36px auto 0 auto;
+      padding: 0 10px 20px 10px;
+      gap: 42px;
+    }
+    .checkout-steps {
+      flex: 1.3;
+      min-width: 370px;
+    }
+    .checkout-step {
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: flex-start;
+      padding: 0;
+      border: 1px solid #eaeaea;
+      opacity: 0.5;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .checkout-step.active {
+      opacity: 1;
+      pointer-events: auto;
+      box-shadow: 0 2px 10px rgba(36,73,135,0.05);
+    }
+    .step-number {
+      font-size: 1.6rem;
+      background: #244987;
+      color: #fff;
+      min-width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center; justify-content: center;
+      margin: 30px 22px 0 22px;
+      font-weight: bold;
+    }
+    .step-content { flex: 1; padding: 24px 16px 22px 0; }
+    .step-content h2 { margin-top: 0; font-size: 1.19rem; color: #222; margin-bottom: 15px;}
+    .form-row {
+      display: flex; gap: 12px;
+      margin-bottom: 8px;
+    }
+    input, select, button {
+      font-family: inherit;
+    }
+    input[type="text"], input[type="date"], select {
+      padding: 12px 9px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #cfcfd7;
+      width: 100%;
+      background: #f8f8fa;
+      transition: border 0.15s;
+    }
+    input:focus, select:focus { border: 1.7px solid #244987; }
+    .continue-btn {
+      background: #244987;
+      color: #fff;
+      border: none;
+      padding: 11px 0;
+      border-radius: 7px;
+      font-size: 1.1rem;
+      width: 100%;
+      margin-top: 7px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .continue-btn:hover { background: #18324b; }
+    .checkout-summary {
+      flex: 1;
+      min-width: 300px; max-width: 345px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 14px rgba(36,73,135,0.06);
+      padding: 25px 19px 19px 19px;
+      position: sticky;
+      top: 30px;
+      align-self: flex-start;
+    }
+    .promo-box {
+      display: flex; gap: 6px; align-items: center;
+      margin-bottom: 13px;
+    }
+    .promo-box input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      border-radius: 6px;
+      font-size: 1rem;
+      padding: 9px;
+      border: 1px solid #cfcfd7;
+    }
+    .apply-btn {
+      background: #244987;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.1rem;
+      padding: 9px 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .apply-btn:hover { background: #18324b; }
+    .order-summary {
+      margin-bottom: 19px;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 12px;
+    }
+    .order-summary p {
+      display: flex; justify-content: space-between; margin: 4px 0;
+      font-size: 1rem;
+      color: #1a1a1a;
+    }
+    .summary-total {
+      font-weight: bold;
+      color: #244987;
+    }
+    .cart-items { margin-bottom: 14px; }
+    .cart-items h3 {
+      font-size: 1.03rem;
+      color: #244987;
+      margin-bottom: 10px;
+    }
+    .cart-product {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 11px;
+    }
+    .cart-product img {
+      width: 56px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #eee;
+      background: #f8f8fa;
+    }
+    .prod-name { font-weight: bold; font-size: 0.97rem; color: #18324b;}
+    .support {
+      background: #f6f6f9;
+      padding: 13px 10px 9px 10px;
+      border-radius: 7px;
+      font-size: 0.99rem;
+      color: #18324b;
+    }
+    .support a { color: #244987; text-decoration: underline; }
+    .checkout-footer {
+      background: #244987;
+      color: #fff;
+      text-align: center;
+      font-size: 1rem;
+      padding: 22px 0 12px 0;
+      margin-top: 34px;
+    }
+    @media (max-width: 900px) {
+      .checkout-main { flex-direction: column; gap: 17px; }
+      .checkout-summary { max-width: 100%; min-width: 0;}
+      .checkout-steps { min-width: 0;}
+    }
+    /* Accordion step pointer for clarity (optional) */
+    .checkout-step { cursor: pointer; }
+    .checkout-step.active { cursor: default; }
+  </style>
 </head>
 <body>
+  <!-- Top Bar -->
+  <header class="checkout-header">
+    <div class="checkout-logo">
+      <img src="images/freshdine_logo.png" alt="FreshDine Logo">
+    </div>
+    <nav>
+      <a href="cart.html" class="checkout-cart-link">View cart</a>
+    </nav>
+  </header>
 
-<header>
-  <div class="logo">
-    <img src="Pictures/photo_2025-05-15_12-16-12.jpg" alt="FreshDine Logo" width="120">
-  </div>
-  <nav>
-    <a href="Homepage.html">Home</a>
-    <a href="recipe discovery.html">Recipes</a>
-    <a href="meal planning.html">Meal Planner</a>
-    <a href="profile.html">Profile</a>
-  </nav>
-</header>
-
-<main class="checkout-page">
-  <h1>Checkout</h1>
-  
-  <div class="checkout-container">
-    <!-- Cart Summary -->
-    <section class="cart-summary">
-      <h2>Your Cart</h2>
-      <div class="cart-item">
-        <img src="Pictures/7499757JollofriceChefJohn4x3-d601da10d7e845d1ad4c8656a5b87ed4.webp" alt="Jollof Rice">
-        <div>
-          <h3>Nigerian Jollof Rice</h3>
-          <p>Quantity: 2</p>
-          <p>Price: €24.00</p>
+  <!-- Main Content -->
+  <main class="checkout-main">
+    <!-- LEFT: Steps -->
+    <section class="checkout-steps">
+      <!-- Step 1: Shipping Address -->
+      <div class="checkout-step active" id="step1">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h2>Shipping address</h2>
+          <form onsubmit="event.preventDefault();showStep(2);">
+            <div class="form-row">
+              <input type="text" placeholder="First Name" required>
+              <input type="text" placeholder="Last Name" required>
+            </div>
+            <input type="text" placeholder="Address 1 - Street or P.O. Box" required>
+            <input type="text" placeholder="Address 2 - Apt, Suite, Floor">
+            <div class="form-row">
+              <input type="text" placeholder="Zip Code" required>
+              <input type="text" placeholder="City" required>
+              <input type="text" placeholder="State" required>
+            </div>
+            <button type="submit" class="continue-btn">Continue to shipping method</button>
+          </form>
         </div>
       </div>
-      <div class="cart-item">
-        <img src="Pictures/spaghetti-carbonara.jpg" alt="Spaghetti Carbonara">
-        <div>
-          <h3>Spaghetti Carbonara</h3>
-          <p>Quantity: 1</p>
-          <p>Price: €12.00</p>
+
+      <!-- Step 2: Shipping Method -->
+      <div class="checkout-step" id="step2">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h2>Shipping method</h2>
+          <form onsubmit="event.preventDefault();showStep(3);">
+            <label><input type="radio" name="shipping" checked> Free Standard Shipping</label>
+            <br>
+            <label><input type="radio" name="shipping"> Express Shipping (€5.00)</label>
+            <br>
+            <button type="submit" class="continue-btn">Continue to payment</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="checkout-step" id="step3">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h2>Payment</h2>
+          <form onsubmit="event.preventDefault();showStep(4);">
+            <label>Payment Method:</label>
+            <select>
+              <option>Credit Card</option>
+              <option>PayPal</option>
+              <option>Bank Transfer</option>
+            </select>
+            <input type="text" placeholder="Card Number">
+            <div class="form-row">
+              <input type="text" placeholder="MM/YY">
+              <input type="text" placeholder="CVV">
+            </div>
+            <button type="submit" class="continue-btn">Review & Place Order</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Step 4: Review & Place Order -->
+      <div class="checkout-step" id="step4">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h2>Review & Place Order</h2>
+          <p>Check your order and shipping information before confirming.</p>
+          <button class="continue-btn">Place Order</button>
         </div>
       </div>
     </section>
 
-    <!-- Delivery Information -->
-    <section class="delivery-info">
-      <h2>Delivery Information</h2>
-      <form>
-        <label>Full Name:</label>
-        <input type="text" placeholder="John Doe">
-        
-        <label>Address:</label>
-        <input type="text" placeholder="Street, City, ZIP">
+    <!-- RIGHT: Summary Sidebar -->
+    <aside class="checkout-summary">
+      <div class="promo-box">
+        <label style="margin-right:4px;">Promo code</label>
+        <input type="text" placeholder="Enter code">
+        <button class="apply-btn">→</button>
+      </div>
+      <div class="order-summary">
+        <p>Subtotal: <span>€36.00</span></p>
+        <p>Shipping: <span>FREE</span></p>
+        <p>Estimated tax: <span>--</span></p>
+        <p class="summary-total">Total: <span>€36.00</span></p>
+      </div>
+      <div class="cart-items">
+        <h3>Cart (2 items)</h3>
+        <div class="cart-product">
+          <img src="images/jollof.jpg" alt="Jollof Rice">
+          <div>
+            <div class="prod-name">Nigerian Jollof Rice</div>
+            <div>Qty: 2</div>
+            <div>€24.00</div>
+          </div>
+        </div>
+        <div class="cart-product">
+          <img src="images/carbonara.jpg" alt="Spaghetti Carbonara">
+          <div>
+            <div class="prod-name">Spaghetti Carbonara</div>
+            <div>Qty: 1</div>
+            <div>€12.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="support">
+        <p><strong>Need help?</strong></p>
+        <a href="#">Visit our Help Center</a>
+        <p>Call us<br>+49 123 456789<br>Mon-Fri 9am-5pm</p>
+      </div>
+    </aside>
+  </main>
 
-        <label>Preferred Delivery Date:</label>
-        <input type="date">
+  <!-- Footer -->
+  <footer class="checkout-footer">
+    <div>
+      &copy; 2025 FreshDine. All rights reserved. | Privacy | Terms | Contact
+    </div>
+  </footer>
 
-        <label>Preferred Time Slot:</label>
-        <select>
-          <option>Morning (8am - 11am)</option>
-          <option>Afternoon (12pm - 3pm)</option>
-          <option>Evening (5pm - 8pm)</option>
-        </select>
-      </form>
-    </section>
-
-    <!-- Billing Info & Order Summary -->
-    <section class="billing-summary">
-      <h2>Billing Information</h2>
-      <form>
-        <label>Payment Method:</label>
-        <select>
-          <option>Credit Card</option>
-          <option>PayPal</option>
-          <option>Bank Transfer</option>
-        </select>
-      </form>
-
-      <h2>Order Summary</h2>
-      <p>Subtotal: €36.00</p>
-      <p>Delivery Fee: €5.00</p>
-      <p><strong>Total: €41.00</strong></p>
-
-      <button class="btn-primary">Place Order</button>
-    </section>
-  </div>
-</main>
-
-<footer>
-  <p>&copy; 2025 FreshDine | <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
-</footer>
-
+  <!-- Accordion Step Switching JS -->
+  <script>
+    // Show one step at a time
+    function showStep(num) {
+      const steps = document.querySelectorAll('.checkout-step');
+      steps.forEach((step, i) => {
+        if ((i+1) === num) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+      // Scroll to step (optional)
+      document.getElementById('step' + num).scrollIntoView({behavior: "smooth", block: "start"});
+    }
+  </script>
 </body>
 </html>
 

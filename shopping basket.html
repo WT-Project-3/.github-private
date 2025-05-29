@@ -4,15 +4,387 @@
 <head>
   <meta charset="UTF-8">
   <title>Shopping Basket - FreshDine</title>
-  <link rel="stylesheet" href="freshdine.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f6f9fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    /* Header styles */
+    .fd-header {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 44px;
+      border-bottom: 1.5px solid #eaeaea;
+    }
+    .fd-logo { height: 40px; }
+    .fd-header nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .fd-header nav a {
+      color: #18324b; font-weight: 600;
+      text-decoration: none; font-size: 1.09rem;
+      padding: 6px 0;
+      transition: color 0.18s;
+    }
+    .fd-header nav a:hover { color: #ffd166; }
+
+    .basket-container {
+      max-width: 570px;
+      background: #fff;
+      border-radius: 16px;
+      margin: 38px auto 28px auto;
+      padding: 34px 24px 20px 24px;
+      box-shadow: 0 4px 16px rgba(24, 50, 75, 0.09);
+    }
+    .basket-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .basket-title {
+      font-size: 1.28rem;
+      font-weight: bold;
+      color: #18324b;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .select-all-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
+      color: #28507c;
+      font-weight: 500;
+    }
+    .shipto-row {
+      margin-bottom: 20px;
+      font-size: 1.07rem;
+      color: #28507c;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .shipto-edit {
+      color: #ffd166;
+      font-size: 0.99rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .shipto-edit:hover {
+      color: #ffb703;
+    }
+
+    .basket-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .basket-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 16px;
+    }
+    .item-image {
+      width: 90px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #f6f9fb;
+      border: 1px solid #eee;
+    }
+    .item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .item-title-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .item-name {
+      font-weight: 600;
+      color: #18324b;
+      font-size: 1.08rem;
+    }
+    .item-price {
+      font-size: 1.07rem;
+      font-weight: bold;
+      color: #28507c;
+    }
+    .item-discount {
+      font-size: 0.98rem;
+      color: #ea5757;
+      font-weight: 600;
+      margin-top: -2px;
+      text-decoration: line-through;
+    }
+    .item-qty-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 7px;
+    }
+    .qty-btn {
+      background: #f7f8fa;
+      border: 1.2px solid #eaeaea;
+      color: #28507c;
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      font-size: 1.18rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .qty-btn:hover {
+      background: #ffd166;
+      color: #18324b;
+    }
+    .item-qty {
+      min-width: 28px;
+      text-align: center;
+      font-size: 1.04rem;
+      font-weight: bold;
+      background: #fff;
+      border: none;
+      outline: none;
+    }
+    .remove-item {
+      margin-left: 13px;
+      color: #ea5757;
+      background: none;
+      border: none;
+      font-size: 0.97rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    /* Basket summary */
+    .basket-summary {
+      margin-top: 8px;
+      background: #f7f8fa;
+      border-radius: 10px;
+      padding: 17px 18px 10px 18px;
+      box-shadow: 0 1px 7px rgba(24,50,75,0.06);
+      font-size: 1.05rem;
+      color: #18324b;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
+    .summary-total {
+      font-size: 1.12rem;
+      font-weight: bold;
+      color: #28507c;
+      margin-top: 8px;
+      border-top: 1.3px solid #eaeaea;
+      padding-top: 9px;
+    }
+    .cta-button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px 0;
+      font-size: 1.11rem;
+      background: #ffd166;
+      color: #18324b;
+      font-weight: bold;
+      border: none;
+      border-radius: 9px;
+      box-shadow: 0 2px 9px rgba(24,50,75,0.09);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.6px;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+    .cta-button:hover {
+      background: #ffb703;
+      color: #fff;
+    }
+    footer {
+      text-align: center;
+      margin: 36px 0 10px 0;
+      color: #18324b;
+      font-size: 1.05rem;
+    }
+    @media (max-width: 600px) {
+      .fd-header { flex-direction: column; padding: 12px 2vw;}
+      .basket-container { padding: 9px 2vw; }
+      .basket-item { flex-direction: column; gap: 7px; align-items: flex-start; }
+      .item-image { width: 100%; max-width: 95vw; height: 84px; }
+      .item-title-price { flex-direction: column; align-items: flex-start; gap: 2px;}
+      .shipto-row { flex-direction: column; align-items: flex-start; gap: 2px;}
+    }
+  </style>
 </head>
 <body>
-<header><h1>Your Basket</h1></header>
-<main>
-  <section>
-    <p>Your selected ingredients and items will be shown here.</p>
-    <a href="checkout.html" class="cta-button">Proceed to Checkout</a>
-  </section>
-</main>
+  <header class="fd-header">
+    <img src="images/freshdine_logo.png" class="fd-logo" alt="FreshDine Logo">
+    <nav>
+      <ul>
+        <li><a href="Homepage.html">Home</a></li>
+        <li><a href="meal planning.html">Meal Plans</a></li>
+        <li><a href="profile-settings.html">Profile</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="basket-container">
+      <div class="basket-title-row">
+        <div class="basket-title">
+          <input type="checkbox" id="selectAll" onclick="selectAllBasket(this)">
+          <label for="selectAll" style="font-weight:500;cursor:pointer;">Select All</label>
+          <span style="margin-left:8px;">Your Basket</span>
+        </div>
+      </div>
+      <div class="shipto-row">
+        <span>Ship to: <span id="addressText">123 Main St, Berlin, Germany</span></span>
+        <a href="profile-settings.html" class="shipto-edit">Edit</a>
+      </div>
+      <div class="basket-list" id="basketList">
+        <!-- Items will appear here -->
+      </div>
+      <div class="basket-summary" id="basketSummary"></div>
+      <a href="checkout.html" class="cta-button">Proceed to Checkout</a>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 FreshDine. All rights reserved.
+  </footer>
+  <script>
+    // Demo data for basket items (replace with backend/JS if needed)
+    let basket = [
+      {
+        id: 1,
+        name: "Chicken Caesar Salad",
+        img: "images/chicken_salad.jpg",
+        price: 8.99,
+        discount: 10.99,
+        qty: 1,
+        checked: false
+      },
+      {
+        id: 2,
+        name: "Vegan Burrito Bowl",
+        img: "images/vegan_bowl.jpg",
+        price: 7.49,
+        discount: null,
+        qty: 2,
+        checked: false
+      },
+      {
+        id: 3,
+        name: "Protein Smoothie",
+        img: "images/protein_smoothie.jpg",
+        price: 3.99,
+        discount: 5.29,
+        qty: 1,
+        checked: false
+      }
+    ];
+
+    function formatPrice(n) { return "€" + n.toFixed(2); }
+
+    function renderBasket() {
+      const basketList = document.getElementById('basketList');
+      basketList.innerHTML = "";
+      if (basket.length === 0) {
+        basketList.innerHTML = "<div style='color:#777;margin:28px auto;text-align:center;'>Your basket is empty.</div>";
+        document.getElementById('basketSummary').innerHTML = "";
+        return;
+      }
+      basket.forEach(item => {
+        let checked = item.checked ? "checked" : "";
+        let itemHTML = `
+          <div class="basket-item" data-id="${item.id}">
+            <input type="checkbox" class="item-check" onchange="checkItem(${item.id})" ${checked} style="margin-top:5px;">
+            <img src="${item.img}" class="item-image" alt="${item.name}">
+            <div class="item-details">
+              <div class="item-title-price">
+                <span class="item-name">${item.name}</span>
+                <span class="item-price">${formatPrice(item.price)}</span>
+              </div>
+              ${item.discount ? `<span class="item-discount">${formatPrice(item.discount)}</span>` : ""}
+              <div class="item-qty-row">
+                <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                <input type="text" class="item-qty" value="${item.qty}" readonly>
+                <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                <button class="remove-item" onclick="removeItem(${item.id})">Remove</button>
+              </div>
+            </div>
+          </div>
+        `;
+        basketList.innerHTML += itemHTML;
+      });
+      updateSummary();
+    }
+
+    function updateQty(id, change) {
+      basket = basket.map(item =>
+        item.id === id
+          ? { ...item, qty: Math.max(1, item.qty + change) }
+          : item
+      );
+      renderBasket();
+    }
+
+    function removeItem(id) {
+      basket = basket.filter(item => item.id !== id);
+      renderBasket();
+    }
+
+    function updateSummary() {
+      let subtotal = 0, discount = 0;
+      basket.forEach(item => {
+        subtotal += item.price * item.qty;
+        if (item.discount) discount += (item.discount - item.price) * item.qty;
+      });
+      let summaryHTML = `
+        <div class="summary-row"><span>Subtotal:</span> <span>${formatPrice(subtotal + discount)}</span></div>
+        <div class="summary-row"><span>Total Discount:</span> <span style="color:#ea5757;">- ${formatPrice(discount)}</span></div>
+        <div class="summary-row summary-total"><span>Total:</span> <span>${formatPrice(subtotal)}</span></div>
+      `;
+      document.getElementById('basketSummary').innerHTML = summaryHTML;
+    }
+
+    // Select All logic
+    function selectAllBasket(checkbox) {
+      basket.forEach(item => item.checked = checkbox.checked);
+      renderBasket();
+      // Update all checkboxes if not all selected/deselected manually
+      document.querySelectorAll('.item-check').forEach(cb => cb.checked = checkbox.checked);
+    }
+    // Check single item logic
+    function checkItem(id) {
+      basket = basket.map(item =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      );
+      // If all are checked, set selectAll checked, else unchecked
+      const allChecked = basket.every(item => item.checked);
+      document.getElementById('selectAll').checked = allChecked;
+    }
+
+    // Simulate fetching address (for demo, set from profile)
+    document.getElementById('addressText').innerText = localStorage.getItem('fd_address') || '123 Main St, Berlin, Germany';
+
+    renderBasket();
+  </script>
 </body>
 </html>

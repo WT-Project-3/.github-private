@@ -4,81 +4,438 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreshDine | Profile Setup</title>
-  <link rel="stylesheet" href="freshdine.css">
+  <style>
+    body {
+      background: #f6f9fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    .fd-header {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 44px;
+      border-bottom: 1.5px solid #eaeaea;
+    }
+    .fd-logo { height: 40px; }
+    .fd-header nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .fd-header nav a {
+      color: #18324b; font-weight: 600;
+      text-decoration: none; font-size: 1.09rem;
+      padding: 6px 0;
+      transition: color 0.18s;
+    }
+    .fd-header nav a:hover { color: #ffd166; }
+    .profile-setup-container {
+      background: #fff;
+      max-width: 420px;
+      margin: 44px auto 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 3px 16px rgba(24, 50, 75, 0.10);
+      padding: 34px 28px 30px 28px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .profile-setup-container h2 {
+      font-size: 2rem; font-weight: bold; color: #18324b;
+      margin-bottom: 10px; text-align: center;
+    }
+    .fd-step {
+      color: #18324b;
+      font-weight: 500;
+      margin-bottom: 7px;
+      text-align: center;
+    }
+    .fd-progress-bar {
+      width: 100%; height: 7px; background: #eaeaea;
+      border-radius: 7px; margin-bottom: 23px; margin-top: 2px;
+      overflow: hidden;
+    }
+    .fd-progress {
+      height: 100%; background: #18324b;
+      border-radius: 7px 0 0 7px;
+      transition: width 0.3s;
+    }
+    .fd-profile-form {
+      width: 100%;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .profile-pic-upload {
+      display: flex; flex-direction: column; align-items: center;
+      margin-bottom: 13px;
+    }
+    .profile-pic-label {
+      cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .profile-pic-preview {
+      width: 120px; height: 120px; object-fit: cover;
+      border-radius: 50%; background: #f2f2f2; border: 2px solid #ffd166;
+      margin-bottom: 4px;
+    }
+    .profile-pic-label span {
+      color: #28507c; font-size: 0.97rem; text-decoration: underline;
+    }
+    .fd-form-row {
+      display: flex; flex-direction: column; gap: 5px; margin-bottom: 4px;
+    }
+    .fd-row-2col {
+      flex-direction: row; gap: 14px;
+    }
+    .fd-row-2col > div { flex: 1; }
+    .fd-form-row label {
+      color: #18324b; font-size: 1.03rem; font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .fd-form-row input[type="text"],
+    .fd-form-row input[type="number"],
+    .fd-form-row input[type="email"],
+    .fd-form-row select {
+      background: #f7f8fa; border: 1px solid #eaeaea;
+      border-radius: 7px; padding: 10px;
+      font-size: 1rem; outline: none;
+      transition: border 0.18s;
+    }
+    .fd-form-row input:focus, .fd-form-row select:focus {
+      border: 1.7px solid #ffd166;
+    }
+    .fd-choice-group {
+      display: flex; gap: 12px; margin-top: 2px; flex-wrap: wrap;
+    }
+    .fd-choice-group input[type="radio"] { display: none; }
+    .fd-choice-group label {
+      padding: 6px 16px;
+      border: 1.6px solid #eaeaea;
+      border-radius: 18px;
+      background: #f7f8fa;
+      color: #18324b;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.98rem;
+      transition: all 0.17s;
+    }
+    .fd-choice-group input[type="radio"]:checked + label {
+      background: #ffd166;
+      color: #18324b;
+      border-color: #ffd166;
+    }
+    .fd-btn {
+      background: #18324b;
+      color: #fff;
+      border: none;
+      width: 100%;
+      font-size: 1.09rem;
+      font-weight: bold;
+      border-radius: 12px;
+      padding: 13px 0;
+      margin-top: 13px;
+      box-shadow: 0 2px 9px rgba(24,50,75,0.08);
+      cursor: pointer;
+      transition: background 0.19s;
+      letter-spacing: 0.5px;
+    }
+    .fd-btn:hover {
+      background: #28507c;
+    }
+    .fd-btn-row {
+      display: flex; gap: 14px; margin-top: 6px; justify-content: flex-end;
+    }
+    .review-box {
+      background: #f7f8fa;
+      border-radius: 14px;
+      padding: 16px 16px 8px 16px;
+      box-shadow: 0 1px 6px rgba(24,50,75,0.06);
+      margin-bottom: 16px;
+      font-size: 1.01rem;
+      color: #18324b;
+    }
+    .phone-row {
+  display: flex;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+}
+.phone-row select {
+  width: 75px;
+  flex-shrink: 0;
+}
+.phone-row input[type="tel"] {
+  flex: 1 1 0%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+    .review-label {
+      font-weight: 600; color: #28507c;
+      margin-right: 4px;
+    }
+    @media (max-width: 540px) {
+      .profile-setup-container { padding: 18px 2vw; }
+      .fd-profile-form { gap: 10px; }
+      .fd-row-2col { flex-direction: column; gap: 7px; }
+      .profile-pic-preview { width: 88px; height: 88px; }
+    }
+    footer {
+      text-align: center;
+      margin: 32px 0 12px 0;
+      color: #18324b;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-
-  <header>
-    <h1>Create Your Profile</h1>
+  <header class="fd-header">
+    <img src="images/freshdine_logo.png" class="fd-logo" alt="FreshDine Logo">
+    <nav>
+      <ul>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Meal Plans</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <form class="profile-form" action="#" method="POST">
-      <!-- Step 1: Personal Information -->
-      <fieldset>
-        <legend>Step 1: Personal Information</legend>
-        <label for="fullname">Full Name:</label>
-        <input type="text" id="fullname" name="fullname" required>
+    <section class="profile-setup-container">
+      <form class="fd-profile-form" id="profileForm" enctype="multipart/form-data">
+        <div id="step1">
+          <h2>Create Your Profile</h2>
+          <div class="fd-step">Step 1 of 2 Personal Info</div>
+          <div class="fd-progress-bar"><div class="fd-progress" style="width: 50%"></div></div>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+          <!-- Profile Picture -->
+          <div class="profile-pic-upload">
+            <label for="avatar" class="profile-pic-label">
+              <img src="images/default_avatar.png" alt="Profile Preview" class="profile-pic-preview" id="avatarPreview" style="border: 2px solid #ffd166;">
+              <span>Upload Photo</span>
+            </label>
+            <input type="file" id="avatar" name="avatar" accept="image/*" style="display:none;" onchange="loadPreview(event)">
+          </div>
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" min="12" max="120">
+          <!-- Name, Age -->
+          <div class="fd-row-2col fd-form-row">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="fullname">
+            </div>
+            <div>
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="12" max="120">
+            </div>
+          </div>
 
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender">
-          <option value="">--Select--</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="nonbinary">Non-binary</option>
-          <option value="other">Other</option>
-        </select>
-      </fieldset>
+          <!-- Email, Phone -->
+          <div class="fd-row-2col fd-form-row">
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <div class="phone-row">
+                <select id="countryCode" name="countryCode">
+                  <option value="+49">+49 (DE)</option>
+                  <option value="+234">+234 (NG)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+1">+1 (US)</option>
+                </select>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]+" placeholder="Phone">
+              </div>
+            </div>
+          </div>
 
-      <!-- Step 2: Health Metrics -->
-      <fieldset>
-        <legend>Step 2: Health Metrics</legend>
-        <label for="height">Height (cm):</label>
-        <input type="number" id="height" name="height">
+          <!-- Gender, Profession -->
+          <div class="fd-row-2col fd-form-row">
+            <div>
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender">
+                <option value="">--Select--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="nonbinary">Non-binary</option>
+                <option value="other">Other</option>
+              </select>
+              <input type="text" id="other-gender-text" name="other-gender-text" placeholder="Type here" style="display:none; margin-top:6px;">
+            </div>
+            <div>
+              <label for="profession">Profession</label>
+              <select id="profession" name="profession">
+                <option value="">--Select--</option>
+                <option value="student">Student</option>
+                <option value="professional">Professional</option>
+                <option value="gamer">Gamer</option>
+                <option value="other">Other</option>
+              </select>
+              <input type="text" id="other-profession-text" name="other-profession-text" placeholder="Type here" style="display:none; margin-top:6px;">
+            </div>
+          </div>
 
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" name="weight">
-      </fieldset>
+          <!-- Address (All on different lines) -->
+          <div class="fd-form-row">
+            <label for="street">Street</label>
+            <input type="text" id="street" name="street">
+          </div>
+          <div class="fd-row-2col fd-form-row">
+            <div>
+              <label for="city">City</label>
+              <input type="text" id="city" name="city">
+            </div>
+            <div>
+              <label for="zip">Zip Code</label>
+              <input type="text" id="zip" name="zip">
+            </div>
+          </div>
+          <div class="fd-row-2col fd-form-row">
+            <div>
+              <label for="state">State</label>
+              <input type="text" id="state" name="state">
+            </div>
+            <div>
+              <label for="country">Country</label>
+              <input type="text" id="country" name="country">
+            </div>
+          </div>
 
-      <!-- Step 3: Dietary Preferences -->
-      <fieldset>
-        <legend>Step 3: Dietary Preferences</legend>
-        <label><input type="checkbox" name="diet" value="vegetarian"> Vegetarian</label><br>
-        <label><input type="checkbox" name="diet" value="vegan"> Vegan</label><br>
-        <label><input type="checkbox" name="diet" value="halal"> Halal</label><br>
-        <label><input type="checkbox" name="diet" value="glutenfree"> Gluten-Free</label><br>
-        <label><input type="checkbox" name="diet" value="dairyfree"> Dairy-Free</label><br>
-      </fieldset>
+          <!-- Navigation Buttons -->
+          <div class="fd-btn-row">
+            <button type="button" class="fd-btn" onclick="showStep(2)">Next</button>
+            <button type="button" class="fd-btn" onclick="showStep(2)">Preview Step 2</button>
+          </div>
+        </div>
 
-      <!-- Step 4: Goal Setting -->
-      <fieldset>
-        <legend>Step 4: Your Goals</legend>
-        <label for="goal">Select your goal:</label>
-        <select id="goal" name="goal">
-          <option value="">--Select--</option>
-          <option value="weightloss">Lose Weight</option>
-          <option value="musclegain">Gain Muscle</option>
-          <option value="balanced">Eat Balanced Meals</option>
-          <option value="explore">Explore New Recipes</option>
-        </select>
+        <!-- Step 2 (MOVED inside the form!) -->
+        <div id="step2" style="display:none;">
+          <h2>Your Preferences</h2>
+          <div class="fd-step">Step 2 of 2 <span class="step-info">Preferences & Review</span></div>
+          <div class="fd-progress-bar"><div class="fd-progress" style="width: 100%"></div></div>
+          <!-- Dietary Preferences -->
+          <div class="fd-form-row">
+            <label>Dietary Preferences</label>
+            <div class="fd-choice-group">
+  <label><input type="checkbox" id="vegan" name="diet" value="Vegan"> Vegan</label>
+  <label><input type="checkbox" id="vegetarian" name="diet" value="Vegetarian"> Vegetarian</label>
+  <label><input type="checkbox" id="halal" name="diet" value="Halal"> Halal</label>
+  <label><input type="checkbox" id="glutenfree" name="diet" value="Gluten-Free"> Gluten-Free</label>
+  <label><input type="checkbox" id="dairyfree" name="diet" value="Dairy-Free"> Dairy-Free</label>
+  <label><input type="checkbox" id="none-diet" name="diet" value="None"> None</label>
+</div>
 
-        <label for="notes">Any additional notes or restrictions?</label>
-        <textarea id="notes" name="notes" rows="4" placeholder="e.g. allergic to peanuts, avoid spicy food..."></textarea>
-      </fieldset>
-
-      <input type="submit" value="Save Profile">
-    </form>
+            
+          </div>
+          <!-- Goals -->
+          <div class="fd-form-row">
+            <label>Goals</label>
+            <div class="fd-choice-group">
+              <input type="radio" id="goal-lose" name="goal" value="Lose weight"><label for="goal-lose">Lose weight</label>
+              <input type="radio" id="goal-maintain" name="goal" value="Maintain weight"><label for="goal-maintain">Maintain weight</label>
+              <input type="radio" id="goal-gain" name="goal" value="Gain weight"><label for="goal-gain">Gain weight</label>
+              <input type="radio" id="goal-explore" name="goal" value="Explore new meals"><label for="goal-explore">Explore new meals</label>
+            </div>
+          </div>
+          <!-- Box Size/Type -->
+          <div class="fd-form-row">
+            <label>Box Type</label>
+            <div class="fd-choice-group">
+              <input type="radio" id="box-family" name="box" value="Family Box"><label for="box-family">Family Box</label>
+              <input type="radio" id="box-single" name="box" value="Single Box"><label for="box-single">Single Box</label>
+              <input type="radio" id="box-couple" name="box" value="Couple Box"><label for="box-couple">Couple Box</label>
+              <input type="radio" id="box-poly" name="box" value="Polyamory Box"><label for="box-poly">Polyamory Box</label>
+              <input type="radio" id="box-bestie" name="box" value="Bestie Box"><label for="box-bestie">Bestie Box</label>
+            </div>
+          </div>
+          <!-- Allergies -->
+          <div class="fd-form-row">
+            <label for="allergies">Allergies or Special Restrictions</label>
+            <textarea id="allergies" name="allergies" rows="3" placeholder="e.g. peanuts, lactose, seafood..."></textarea>
+          </div>
+          <!-- Review -->
+          <div class="fd-form-row">
+            <label>Review Your Info</label>
+            <div class="review-box" id="reviewBox"></div>
+          </div>
+          <div class="fd-btn-row">
+            <button type="button" class="fd-btn" onclick="showStep(1)">Back</button>
+            <button type="submit" class="fd-btn">Confirm & Save</button>
+          </div>
+        </div>
+      </form>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 FreshDine. All rights reserved.</p>
   </footer>
+  <script>
+    // Show/hide steps
+    function showStep(step) {
+      document.getElementById('step1').style.display = (step === 1) ? '' : 'none';
+      document.getElementById('step2').style.display = (step === 2) ? '' : 'none';
+      if (step === 2) fillReview();
+    }
+    // Profile photo preview
+    function loadPreview(event) {
+      const output = document.getElementById('avatarPreview');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() { URL.revokeObjectURL(output.src) }
+    }
+    // Show other textboxes for gender/profession (for select, not radio)
+    document.getElementById('gender').addEventListener('change', function() {
+      document.getElementById('other-gender-text').style.display =
+        (this.value === 'other') ? 'block' : 'none';
+    });
+    document.getElementById('profession').addEventListener('change', function() {
+      document.getElementById('other-profession-text').style.display =
+        (this.value === 'other') ? 'block' : 'none';
+    });
 
+    // Collect and show the review summary on step 2
+    function fillReview() {
+      const getVal = id => document.getElementById(id)?.value || '';
+      // Dietary preferences (checkbox group)
+      const dietChecked = Array.from(document.querySelectorAll('input[name="diet"]:checked'))
+        .map(cb => cb.labels[0].innerText).join(', ') || 'None';
+      // Helper for radio values
+      const radioVal = name => {
+        const checked = document.querySelector('input[name="' + name + '"]:checked');
+        if (!checked) return '';
+        return checked.value;
+      };
+      // Address formatted
+      const address =
+        (getVal('street') ? getVal('street') + ', ' : '') +
+        (getVal('city') ? getVal('city') + ', ' : '') +
+        (getVal('zip') ? getVal('zip') + ', ' : '') +
+        (getVal('state') ? getVal('state') + ', ' : '') +
+        (getVal('country') ? getVal('country') : '');
+
+      // Phone with country code
+      const countryCode = getVal('countryCode');
+      const phone = getVal('phone');
+      // Fill review box
+      document.getElementById('reviewBox').innerHTML = `
+        <div><span class="review-label">Name:</span> ${getVal('name')}</div>
+        <div><span class="review-label">Age:</span> ${getVal('age')}</div>
+        <div><span class="review-label">Email:</span> ${getVal('email')}</div>
+        <div><span class="review-label">Phone:</span> ${countryCode} ${phone}</div>
+        <div><span class="review-label">Gender:</span> ${getVal('gender') === 'other' ? 'Other: ' + getVal('other-gender-text') : getVal('gender')}</div>
+        <div><span class="review-label">Profession:</span> ${getVal('profession') === 'other' ? 'Other: ' + getVal('other-profession-text') : getVal('profession')}</div>
+        <div><span class="review-label">Address:</span> ${address}</div>
+        <div><span class="review-label">Diet:</span> ${dietChecked}</div>
+        <div><span class="review-label">Goals:</span> ${radioVal('goal')}</div>
+        <div><span class="review-label">Box Type:</span> ${radioVal('box')}</div>
+        <div><span class="review-label">Allergies:</span> ${getVal('allergies')}</div>
+      `;
+    }
+
+    // (Optional) Prevent form submission for demo
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Profile saved! (Demo only)');
+    });
+  </script>
 </body>
 </html>

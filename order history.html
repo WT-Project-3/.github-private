@@ -1,17 +1,396 @@
-<!-- order-history.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Order History - FreshDine</title>
-  <link rel="stylesheet" href="freshdine.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts for modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,500,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #244987;
+      --primary-light: #457bee;
+      --accent: #ffd166;
+      --bg: #f7faff;
+      --white: #fff;
+      --gray: #e5e9f2;
+      --text: #193156;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+    }
+    header {
+      background: var(--primary);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 38px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .fd-logo {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .fd-nav {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .fd-nav a, .fd-user {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-left: 16px;
+      transition: color 0.17s;
+    }
+    .fd-nav a:hover { color: var(--accent);}
+    .fd-user {
+      display: flex; align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      padding: 7px 15px;
+      border-radius: 22px;
+    }
+    .fd-nav .icon {
+      width: 22px; height: 22px;
+      filter: invert(1);
+      vertical-align: middle;
+    }
+    .main-banner {
+      background: url(Pictures/vegan_delight.jpg) center/cover no-repeat;
+      padding: 62px 0 85px 0;
+      text-align: center;
+      position: relative;
+      color: #fff;
+      min-height: 300px;
+    }
+    .main-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(36,73,135, 0.78);
+      z-index: 1;
+    }
+    .main-banner-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .main-banner h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .main-banner .banner-searchbar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0 0 0;
+      flex-wrap: wrap;
+    }
+    .banner-searchbar input, .banner-searchbar select {
+      padding: 13px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      width: 180px;
+      margin: 0 4px;
+    }
+    .banner-searchbar .fd-btn {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: bold;
+      border: none;
+      padding: 13px 27px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.19s;
+      margin-left: 8px;
+    }
+    .banner-searchbar .fd-btn:hover {
+      background: #ffe496;
+    }
+    .main-banner .banner-links {
+      margin-top: 20px;
+      font-size: 1.06rem;
+      opacity: 0.95;
+    }
+    .main-banner .banner-links a {
+      color: var(--accent);
+      margin: 0 10px;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    /* Order History Section */
+    .order-history-section {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(36,73,135,0.07);
+      margin: -65px auto 0 auto;
+      max-width: 1100px;
+      padding: 42px 0 32px 0;
+      position: relative;
+      z-index: 2;
+    }
+    .order-history-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+    .order-history-header h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+      color: var(--primary);
+    }
+    .order-history-header .time-of-day-link {
+      color: var(--primary-light);
+      font-weight: 500;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-left: 6px;
+      font-size: 0.99rem;
+    }
+    .order-cards-list {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 12px;
+    }
+    .order-card {
+      background: var(--bg);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(36,73,135,0.06);
+      min-width: 235px; max-width: 285px;
+      width: 100%;
+      padding: 19px 18px 15px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+    .order-card .brand-logo {
+      height: 28px;
+      margin-bottom: 6px;
+    }
+    .order-card .order-title {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 1.09rem;
+      margin-bottom: 1px;
+    }
+    .order-card .order-total {
+      font-weight: bold;
+      color: var(--primary-light);
+      font-size: 1.06rem;
+      margin-bottom: 4px;
+    }
+    .order-card .order-detail {
+      font-size: 0.99rem;
+      color: #28406b;
+      margin-bottom: 3px;
+      opacity: 0.92;
+    }
+    .order-card .order-date {
+      font-size: 0.93rem;
+      color: #3e4d6a;
+      margin-bottom: 9px;
+    }
+    .order-card .order-actions {
+      margin-top: 9px;
+      display: flex;
+      gap: 17px;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .order-card .order-actions a {
+      color: var(--primary-light);
+      font-weight: 500;
+      text-decoration: underline;
+      font-size: 0.99rem;
+      cursor: pointer;
+    }
+    .order-card .order-icons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .order-card .order-icons .icon {
+      width: 22px; height: 22px;
+      opacity: 0.75;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .order-card .order-icons .icon:hover { opacity: 1; }
+    .order-card .dish-preview {
+      width: 95px; height: 54px; object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 7px;
+    }
+    .order-card .order-type {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 7px;
+      font-size: 0.93rem;
+      padding: 2px 8px;
+      margin-bottom: 9px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      display: inline-block;
+    }
+    .view-past-link {
+      display: block;
+      text-align: center;
+      margin-top: 26px;
+      color: var(--primary-light);
+      font-weight: 500;
+      font-size: 1rem;
+      text-decoration: underline;
+    }
+    @media (max-width: 820px) {
+      .main-banner { padding: 30px 0 44px 0;}
+      .order-cards-list { gap: 15px;}
+      .order-card { min-width: 98vw; max-width: 99vw;}
+    }
+    @media (max-width: 580px) {
+      header { padding: 16px 4vw;}
+      .order-history-section { margin: -38px 0 0 0; border-radius: 0;}
+      .main-banner { padding: 18vw 0 20vw 0;}
+      .order-card { min-width: 92vw; max-width: 99vw;}
+    }
+  </style>
 </head>
 <body>
-<header><h1>Order History</h1></header>
-<main>
-  <section>
-    <p>No recent orders. Your past orders will appear here.</p>
+  <!-- HEADER -->
+  <header>
+    <div class="fd-logo">FreshDine</div>
+    <nav class="fd-nav">
+      <a href="#">Home</a>
+      <a href="#">Orders</a>
+      <a href="#">Contact Us</a>
+      <span class="fd-user">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="icon" alt="User">
+        Account
+      </span>
+      <span class="fd-user">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="icon" alt="Basket">
+        Basket
+      </span>
+    </nav>
+  </header>
+
+  <!-- TOP BANNER -->
+  <section class="main-banner">
+    <div class="main-banner-content">
+      <h1>A recipe has no soul. You, as the cook, must bring soul to the recipe.</h1>
+      <div class="banner-searchbar">
+        <select>
+          <option>ASAP</option>
+          <option>Today</option>
+          <option>Tomorrow</option>
+        </select>
+        <input type="text" placeholder="Home, 1065 6th Ave...">
+        <input type="text" placeholder="e.g. Sushi, pasta">
+        <button class="fd-btn">Find food</button>
+      </div>
+      <div class="banner-links">
+        <a href="#">Delivery</a> | 
+        <a href="#">Pickup</a>
+      </div>
+      <div style="margin-top:10px; font-size:1rem;">
+        What do you feel like? <span style="opacity:0.7;">(optional)</span>
+      </div>
+    </div>
   </section>
-</main>
+
+  <!-- ORDER HISTORY -->
+  <section class="order-history-section">
+    <div class="order-history-header">
+      <h2>Your recent orders</h2>
+      <div>
+        View your orders by <span class="time-of-day-link">Time of Day</span>
+      </div>
+    </div>
+    <div class="order-cards-list">
+      <!-- Card 1 -->
+      <div class="order-card">
+        <img src="Pictures/vegan_delight.jpg" class="dish-preview" alt="Spaghetti Carbonara">
+        <div class="order-title">vegan delight.</div>
+        <div class="order-total">Total €13.99</div>
+        <div class="order-detail">1 Item</div>
+        <div class="order-date">May 24, 2025<br>DELIVERY to 1065 6th Ave, Berlin</div>
+        <div class="order-type">DELIVERY</div>
+        <div class="order-actions">
+          <a href="#">Reorder now</a>
+          <div class="order-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="order-card">
+        <img src="Pictures/spaghetti-carbonara.jpg" class="dish-preview" alt="Spaghetti Carbonara">
+        <div class="order-title">Pasta</div>
+        <div class="order-total">Total €9.42</div>
+        <div class="order-detail">1 Item</div>
+        <div class="order-date">May 10, 2025<br>PICKUP at Alexanderplatz, Berlin</div>
+        <div class="order-type">DELIVERY</div>
+        <div class="order-actions">
+          <a href="#">Reorder now</a>
+          <div class="order-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="order-card">
+        <img src="Pictures/sheet-pan-veggie-tacos-close.jpg" class="dish-preview" alt="Spaghetti Carbonara">
+        <div class="order-title">tacos</div>
+        <div class="order-total">Total €10.32</div>
+        <div class="order-detail">1 Item</div>
+        <div class="order-date">May 6, 2025<br>DELIVERY to 12 Fresh Ave, Munich</div>
+        <div class="order-type">DELIVERY</div>
+        <div class="order-actions">
+          <a href="#">Rate & review</a>
+          <div class="order-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="order-card">
+        <img src="Pictures/Bratwurst-and-Sauerkraut-2.jpg" class="dish-preview" alt="Spaghetti Carbonara">
+        <div class="order-title">Bratwurst-and-Sauerkraut</div>
+        <div class="order-total">Total €15.23</div>
+        <div class="order-detail">1 Item</div>
+        <div class="order-date">April 30, 2025<br>PICKUP at 6 River Rd, Frankfurt</div>
+        <div class="order-type">PICKUP</div>
+        <div class="order-actions">
+          <a href="#">Reorder now</a>
+          <div class="order-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="view-past-link">View your past orders</a>
+  </section>
+
 </body>
 </html>
+

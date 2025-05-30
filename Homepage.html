@@ -27,7 +27,7 @@
   <main>
     <!-- Hero Section -->
     <section id="home" class="hero">
-      <h1>Eat Healthy Without th Hassle</h1>
+      <h1>Eat Healthy Without the Hassle</h1>
       <p>Your personalized meal planning & ingredient delivery solution</p>
       <a href="meal planning.html" class="cta-button">Explore Meal Plans</a>
     </section>
@@ -98,6 +98,79 @@
     <p>&copy; 2025 FreshDine | <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
     <p>Email: info@freshdine.com</p>
   </footer>
+  <!-- Special Offer Box & JS -->
+<div id="special-offer" style="display:none; position:fixed; top:30px; left:50%; transform:translateX(-50%); background:#ffd166; color:#244987; border-radius:12px; box-shadow:0 3px 15px rgba(36,73,135,0.15); padding:28px 32px; z-index:999; font-size:1.13rem; font-weight:500;">
+  <span id="offer-message"></span>
+  <button onclick="document.getElementById('special-offer').style.display='none'" style="margin-left:24px; padding:6px 18px; border-radius:6px; border:none; background:#244987; color:#fff; cursor:pointer;">Close</button>
+</div>
+
+<!-- Need Help Box -->
+<div id="help-box" style="display:none; position:fixed; bottom:36px; right:28px; background:#244987; color:#fff; border-radius:14px; box-shadow:0 3px 14px rgba(36,73,135,0.19); padding:24px 28px; font-size:1.1rem; z-index:998;">
+  Do you need help? <a href="contact.html" style="color:#ffd166; font-weight:bold; text-decoration:underline;">Please, click the link</a>
+</div>
+
+<script>
+/* --- 1. SPECIAL OFFER LOGIC --- */
+(function(){
+  // Set your offer expiry here
+  var offerEnds = new Date("2025-06-10T23:59:59"); // Change date as needed
+  var now = new Date();
+  if(now < offerEnds){
+    document.getElementById('special-offer').style.display = 'block';
+    document.getElementById('offer-message').innerHTML =
+      '<strong>🌟 Special Offer!</strong> Get 15% off all meal plans! Offer ends ' +
+      offerEnds.toLocaleDateString();
+  }
+})();
+
+
+/* --- 3. MAIN IMAGE CHANGE BY SEASON --- */
+(function(){
+  // Map months/seasons to images
+  var seasonImages = {
+    "winter": "Pictures/winter_banner.jpg",
+    "spring": "Pictures/spring_banner.jpg",
+    "summer": "Pictures/summer_banner.jpg",
+    "autumn": "Pictures/autumn_banner.jpg"
+  };
+  var month = new Date().getMonth(); // 0 = Jan, 1 = Feb, ...
+  var season = "winter";
+  if([2,3,4].includes(month)) season = "spring";    // Mar, Apr, May
+  else if([5,6,7].includes(month)) season = "summer"; // Jun, Jul, Aug
+  else if([8,9,10].includes(month)) season = "autumn"; // Sep, Oct, Nov
+
+  // Change the hero image (make sure your <section class="hero"> has a background image set in CSS)
+  var hero = document.querySelector('.hero');
+  if(hero && seasonImages[season]){
+    hero.style.backgroundImage = "url('Pictures/hero_photo.png')";
+    hero.style.backgroundSize = "cover";
+    hero.style.backgroundPosition = "center";
+  }
+})();
+</script>
+
+<!-- Help Popup Box -->
+<div id="fdHelpPopup" class="fd-help-popup" role="alert">
+  <button class="fd-close" onclick="fdClosePopup()" aria-label="Close">&times;</button>
+  <div>Need help? <br>
+    <a href="contact.html">Click here to contact us</a>
+  </div>
+</div>
+
+<script>
+  // Show popup after 60 seconds
+  let fdHelpTimeout = setTimeout(() => {
+    document.getElementById('fdHelpPopup').style.display = 'block';
+    // Hide popup after another 60s
+    setTimeout(fdClosePopup, 60000);
+  }, 60000);
+
+  // Allow manual close
+  function fdClosePopup() {
+    document.getElementById('fdHelpPopup').style.display = 'none';
+    clearTimeout(fdHelpTimeout);
+  }
+</script>
 
 </body>
 </html>

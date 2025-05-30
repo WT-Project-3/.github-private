@@ -510,6 +510,57 @@ nav a:hover {
   background: #fcb900;
   color: #18324b !important;
 }
+/* Popup Helper Styles */
+.fd-help-popup {
+  display: none;  /* Start hidden */
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  background: #fff;
+  color: #244987;
+  border: 2px solid #244987;
+  border-radius: 14px;
+  box-shadow: 0 6px 32px rgba(36, 73, 135, 0.10);
+  padding: 18px 25px 15px 25px;
+  min-width: 255px;
+  max-width: 350px;
+  font-family: inherit;
+  font-size: 1.04rem;
+  align-items: center;
+  animation: fd-popin 0.45s;
+}
+
+@keyframes fd-popin {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.fd-help-popup a {
+  color: #244987;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.fd-help-popup .fd-close {
+  position: absolute;
+  top: 8px; right: 12px;
+  background: none; border: none;
+  color: #457bee;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .fd-help-popup {
+    right: 8px;
+    left: 8px;
+    bottom: 8px;
+    min-width: unset;
+    max-width: unset;
+  }
+}
 
 /* ----------- MEAL CALENDAR GRID ----------- */
 body {

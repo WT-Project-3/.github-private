@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - FreshDine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #244987;
+      --accent: #ffd166;
+      --bg: #f7faff;
+      --white: #fff;
+      --gray: #e5e9f2;
+      --text: #193156;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+    }
+    header {
+      background: var(--primary);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 38px;
+    }
+    .fd-logo img {
+      height: 42px;
+      vertical-align: middle;
+    }
+    nav {
+      display: flex; gap: 30px;
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.07rem;
+      transition: color 0.18s;
+    }
+    nav a:hover { color: var(--accent);}
+    .contact-container {
+      max-width: 460px;
+      margin: 55px auto 0 auto;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 26px 32px 26px;
+      box-shadow: 0 4px 16px rgba(36,73,135,0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .contact-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .contact-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .contact-header p {
+      font-size: 1.11rem;
+      color: #457bee;
+      margin-top: 9px;
+    }
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: 500;
+      color: #244987;
+      margin-bottom: 3px;
+    }
+    input[type="text"], input[type="email"], textarea {
+      padding: 11px;
+      border-radius: 8px;
+      border: 1.5px solid #e5e9f2;
+      background: #f7faff;
+      font-size: 1rem;
+      transition: border 0.18s;
+      resize: vertical;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+      border: 2px solid var(--accent);
+      outline: none;
+    }
+    textarea { min-height: 70px; }
+    button {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1.09rem;
+      font-weight: bold;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    button:hover { background: #457bee;}
+    .success-msg {
+      background: #d8ffda;
+      color: #187434;
+      border-radius: 7px;
+      padding: 11px 10px 9px 10px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .contact-container { padding: 14px 2vw 18px 2vw; }
+      header { padding: 14px 3vw; }
+    }
+    footer {
+      text-align: center;
+      background: var(--gray);
+      color: #193156;
+      font-size: 1rem;
+      padding: 16px 0 10px 0;
+      margin-top: 44px;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="fd-logo"><img src="Pictures/photo_2025-05-15_12-16-12.jpg" alt="FreshDine Logo"></div>
+    <nav>
+      <a href="Homepage.html">Home</a>
+      <a href="meal planning.html">Meal Plans</a>
+      <a href="profile.html">Profile</a>
+      <a href="contact.html" style="color:var(--accent);font-weight:600;">Contact</a>
+      <a href="about.html">About Us</a>
+    </nav>
+  </header>
+  <main>
+    <section class="contact-container">
+      <div class="contact-header">
+        <h1>Contact Us</h1>
+        <p>Questions? Feedback? Reach out and we’ll get back to you within 24 hours.</p>
+      </div>
+      <div class="success-msg" id="successMsg">Thank you for contacting us! We'll respond soon.</div>
+      <form id="contactForm" autocomplete="off">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+      <div style="margin-top:18px;font-size:0.99rem;text-align:center;">
+        Or email us directly: <a href="mailto:info@freshdine.com" style="color:#457bee;font-weight:600;text-decoration:underline;">info@freshdine.com</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 FreshDine | <a href="about.html" style="color:#244987;text-decoration:underline;">About Us</a>
+  </footer>
+  <script>
+    // Contact form simple "sent" message without backend
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('successMsg').style.display = 'block';
+      this.reset();
+      setTimeout(function(){
+        document.getElementById('successMsg').style.display = 'none';
+      }, 6000);
+    });
+  </script>
+</body>
+</html>

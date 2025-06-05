@@ -4,14 +4,376 @@
 <head>
   <meta charset="UTF-8">
   <title>Favorites - FreshDine</title>
-  <link rel="stylesheet" href="freshdine.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts for modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,500,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #244987;
+      --primary-light: #457bee;
+      --accent: #ffd166;
+      --bg: #f7faff;
+      --white: #fff;
+      --gray: #e5e9f2;
+      --text: #193156;
+      --card-radius: 13px;
+      --shadow: 0 4px 12px rgba(36,73,135,0.07);
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+    }
+    header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 22px 0 18px 0;
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .fav-container {
+      max-width: 1120px;
+      margin: 36px auto;
+      padding: 0 16px;
+    }
+    .fav-heading {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #244987;
+      text-align: center;
+      background: #f1f6fc;
+      border-radius: 8px;
+      padding: 13px 8px 10px 8px;
+      box-shadow: 0 2px 10px #eaeaea;
+    }
+    .fav-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: flex-start;
+      margin-bottom: 19px;
+      align-items: center;
+      padding: 5px 0 3px 0;
+    }
+    .fav-control {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      min-width: 135px;
+    }
+    .fav-control label {
+      color: #457bee;
+      font-size: 0.93rem;
+      font-weight: 500;
+      margin-bottom: 3px;
+      letter-spacing: 0.3px;
+    }
+    .fav-control select {
+      padding: 7px 9px;
+      border-radius: 7px;
+      border: 1.2px solid #eaeaea;
+      background: #f7f8fa;
+      font-size: 1rem;
+      color: #18324b;
+      outline: none;
+      margin-top: 2px;
+    }
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 28px;
+      margin-top: 8px;
+    }
+    .fav-card {
+      background: var(--white);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 13px 20px 13px;
+      position: relative;
+      transition: box-shadow 0.17s;
+      min-width: 0;
+    }
+    .fav-card:hover {
+      box-shadow: 0 8px 24px rgba(36,73,135,0.11);
+    }
+    .fav-card img {
+      width: 150px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 9px;
+      background: #e5e9f2;
+      margin-bottom: 9px;
+    }
+    .fav-title {
+      font-size: 1.13rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+      text-align: center;
+      min-height: 34px;
+    }
+    .fav-price {
+      font-weight: 500;
+      color: #ffd166;
+      font-size: 1.09rem;
+      margin-bottom: 2px;
+    }
+    .fav-tags {
+      color: #457bee;
+      font-size: 0.97rem;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .fav-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: 12px;
+      gap: 8px;
+    }
+    .fav-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.99rem;
+      font-weight: 500;
+      padding: 8px 17px;
+      cursor: pointer;
+      transition: background 0.18s;
+      box-shadow: 0 1px 4px #eaeaea;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .fav-btn:hover { background: #457bee; }
+    .fav-heart, .fav-cart {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.36rem;
+      margin-left: 3px;
+      transition: color 0.16s;
+      vertical-align: middle;
+      outline: none;
+    }
+    .fav-heart.filled {
+      color: #ee2d5f;
+    }
+    .fav-heart { color: #ffd166; }
+    .fav-cart { color: #457bee; }
+    .fav-empty-message {
+      background: #f7faff;
+      color: #244987;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #eaeaea;
+      padding: 25px 18px;
+      text-align: center;
+      margin-top: 38px;
+      font-size: 1.09rem;
+    }
+    @media (max-width: 800px) {
+      .fav-grid { gap: 17px; }
+      .fav-card img { width: 100%; height: 95px;}
+      .fav-controls-row { gap: 10px;}
+    }
+    @media (max-width: 600px) {
+      header { font-size: 1.12rem; padding: 14px 0; }
+      .fav-container { margin: 12px 0; }
+      .fav-grid { gap: 11px; }
+      .fav-card img { width: 100%; height: 80px;}
+      .fav-controls-row { flex-direction: column; align-items: flex-start;}
+    }
+    footer {
+      text-align: center;
+      margin: 34px 0 15px 0;
+      color: #193156;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-<header><h1>Your Favorite Recipes</h1></header>
-<main>
-  <section>
-    <p>Bookmark your favorite meals here.</p>
-  </section>
-</main>
+  <header>
+    Your Favorite Recipes
+  </header>
+  <div class="fav-container">
+    <div class="fav-heading">
+      <strong>Tip:</strong> Add your favorite recipes to your basket for easy checkout! <br>
+      Don’t forget to grab what you love—freshness is just a click away.
+    </div>
+
+    <!-- Controls: Sort, Category, Status -->
+    <div class="fav-controls-row">
+      <div class="fav-control">
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option>Popular Meal</option>
+          <option>Discount Meal</option>
+          <option>Recently Added</option>
+          <option>New Recipe</option>
+        </select>
+      </div>
+      <div class="fav-control">
+        <label for="category">Category</label>
+        <select id="category">
+          <option>All</option>
+          <option>Desert</option>
+          <option>Fruits</option>
+          <option>Winter</option>
+          <option>Spring</option>
+          <option>Summer</option>
+          <option>Autumn</option>
+          <option>Salad</option>
+          <option>Soup</option>
+          <option>Vegan</option>
+          <option>Hearty</option>
+          <option>Protein</option>
+          <option>Breakfast</option>
+          <option>Family</option>
+        </select>
+      </div>
+      <div class="fav-control">
+        <label for="status">Status</label>
+        <select id="status">
+          <option>In Stock</option>
+          <option>Out of Stock</option>
+          <option>Promotion</option>
+          <option>Purchased</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="fav-grid" id="favGrid">
+      <!-- Sample card, repeat as needed -->
+      <div class="fav-card">
+        <img src="Pictures/vegan_delight.jpg" alt="Vegan Delight Bowl">
+        <div class="fav-title">Vegan Delight Bowl</div>
+        <div class="fav-price">€8.99</div>
+        <div class="fav-tags">Vegan • Spring • In Stock</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/vegan budha bowl.jpg" alt="Vegan Buddha Bowl">
+        <div class="fav-title">Vegan Buddha Bowl</div>
+        <div class="fav-price">€9.20</div>
+        <div class="fav-tags">Vegan • Summer • Promotion</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/mutton stew.jpg" alt="Mutton Stew">
+        <div class="fav-title">Mutton Stew</div>
+        <div class="fav-price">€11.60</div>
+        <div class="fav-tags">Hearty • Winter • In Stock</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/blanced meal.jpg" alt="Balanced Meal">
+        <div class="fav-title">Balanced Meal</div>
+        <div class="fav-price">€7.90</div>
+        <div class="fav-tags">Protein • Balanced • Spring</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/classic vegan bowl.jpg" alt="Classic Vegan Bowl">
+        <div class="fav-title">Classic Vegan Bowl</div>
+        <div class="fav-price">€8.45</div>
+        <div class="fav-tags">Vegan • Classic • In Stock</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/protein plate.jpg" alt="Protein Plate">
+        <div class="fav-title">Protein Plate</div>
+        <div class="fav-price">€10.30</div>
+        <div class="fav-tags">Protein • Summer • Promotion</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/fruit basket.png" alt="Fruit Basket">
+        <div class="fav-title">Fruit Basket</div>
+        <div class="fav-price">€5.60</div>
+        <div class="fav-tags">Fruits • Breakfast • Autumn</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+      <div class="fav-card">
+        <img src="Pictures/chocolate cake (1).png" alt="Chocolate Cake">
+        <div class="fav-title">Chocolate Cake</div>
+        <div class="fav-price">€6.99</div>
+        <div class="fav-tags">Dessert • Family • In Stock</div>
+        <div class="fav-actions">
+          <button class="fav-btn" onclick="window.location.href='recipe-discovery.html'">View Recipe</button>
+          <button class="fav-cart" title="Add to Basket" onclick="addToBasket(this)">🛒</button>
+          <button class="fav-heart filled" title="Remove from Favorites" onclick="removeFavorite(this)">&#10084;</button>
+        </div>
+      </div>
+    </div>
+    <div class="fav-empty-message" id="emptyMsg" style="display:none;">
+      You haven't added any favorites yet.<br>
+      Explore our <a href="recipe-discovery.html" style="color:#457bee;text-decoration:underline;">recipes</a> and add your favorites!
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 FreshDine | <a href="Homepage.html" style="color:#244987;text-decoration:underline;">Home</a>
+  </footer>
+  <script>
+    // Remove card from favorites (demo: just hides card)
+    function removeFavorite(btn) {
+      let card = btn.closest('.fav-card');
+      card.style.opacity = "0";
+      setTimeout(function(){
+        card.style.display = "none";
+        checkEmptyFavorites();
+      }, 350);
+    }
+    function checkEmptyFavorites() {
+      var grid = document.getElementById('favGrid');
+      if([...grid.children].filter(el=>el.style.display !== "none").length === 0){
+        document.getElementById('emptyMsg').style.display = "";
+      }
+    }
+    // Add to Basket (demo: just an alert, but you can update for real cart)
+    function addToBasket(btn) {
+      btn.innerHTML = "✔️";
+      btn.title = "Added!";
+      setTimeout(() => {
+        btn.innerHTML = "🛒";
+        btn.title = "Add to Basket";
+      }, 1200);
+      alert("Added to your basket! (Demo)");
+    }
+  </script>
 </body>
 </html>

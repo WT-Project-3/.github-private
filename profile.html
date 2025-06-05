@@ -5,436 +5,381 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreshDine | Profile Setup</title>
   <style>
-    body {
-      background: #f6f9fb;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
+    :root {
+      --sidebar-bg: #244987;
+      --sidebar-light: #3564b1;
+      --accent: #ffd166;
+      --main-bg: #f6f9fb;
+      --white: #fff;
+      --text: #18324b;
+      --gray: #eaeaea;
     }
-    .fd-header {
-      background: #fff;
+    body {
+      margin: 0;
+      background: var(--main-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+    }
+    .dashboard-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* --- SIDEBAR --- */
+    .sidebar {
+      width: 220px;
+      background: var(--sidebar-bg);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+    }
+    .sidebar-logo {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 44px;
-      border-bottom: 1.5px solid #eaeaea;
+      justify-content: center;
+      height: 70px;
+      border-bottom: 1.5px solid #1b3566;
+      margin-bottom: 12px;
     }
-    .fd-logo { height: 40px; }
-    .fd-header nav ul {
-      display: flex;
-      gap: 30px;
+    .sidebar-logo img {
+      height: 38px;
+      margin-right: 10px;
+    }
+    .sidebar-logo span {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 18px 0;
+    }
+    .sidebar-nav ul {
       list-style: none;
-      margin: 0; padding: 0;
+      padding: 0 0 0 18px;
+      margin: 0;
     }
-    .fd-header nav a {
-      color: #18324b; font-weight: 600;
-      text-decoration: none; font-size: 1.09rem;
-      padding: 6px 0;
-      transition: color 0.18s;
+    .sidebar-nav li {
+      margin: 13px 0;
     }
-    .fd-header nav a:hover { color: #ffd166; }
-    .profile-setup-container {
-      background: #fff;
-      max-width: 420px;
-      margin: 44px auto 0 auto;
-      border-radius: 16px;
-      box-shadow: 0 3px 16px rgba(24, 50, 75, 0.10);
-      padding: 34px 28px 30px 28px;
-      display: flex; flex-direction: column; align-items: center;
+    .sidebar-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.09rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px 8px 0;
+      border-radius: 8px 0 0 8px;
+      transition: background 0.17s;
     }
-    .profile-setup-container h2 {
-      font-size: 2rem; font-weight: bold; color: #18324b;
-      margin-bottom: 10px; text-align: center;
+    .sidebar-nav a.active, .sidebar-nav a:hover {
+      background: var(--sidebar-light);
+      color: var(--accent);
     }
-    .fd-step {
-      color: #18324b;
-      font-weight: 500;
-      margin-bottom: 7px;
+    .sidebar-footer {
+      font-size: 0.98rem;
+      color: #eaeaea;
       text-align: center;
+      padding: 20px 0 8px 0;
+      border-top: 1px solid #2d4579;
     }
-    .fd-progress-bar {
-      width: 100%; height: 7px; background: #eaeaea;
-      border-radius: 7px; margin-bottom: 23px; margin-top: 2px;
-      overflow: hidden;
+    /* --- MAIN CONTENT --- */
+    .main-content {
+      flex: 1;
+      padding: 42px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
     }
-    .fd-progress {
-      height: 100%; background: #18324b;
-      border-radius: 7px 0 0 7px;
-      transition: width 0.3s;
+    .profile-setup-dashboard {
+      display: flex;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(36, 73, 135, 0.10);
+      width: 85vw;
+      max-width: 1100px;
+      margin: 0 auto 44px auto;
+      min-height: 680px;
+      padding: 38px 32px 36px 32px;
+      gap: 36px;
     }
-    .fd-profile-form {
-      width: 100%;
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .profile-pic-upload {
-      display: flex; flex-direction: column; align-items: center;
-      margin-bottom: 13px;
-    }
-    .profile-pic-label {
-      cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    /* Left column: photo + actions */
+    .profile-sidebar {
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-right: 1.5px solid #eaeaea;
+      padding-right: 32px;
     }
     .profile-pic-preview {
-      width: 120px; height: 120px; object-fit: cover;
-      border-radius: 50%; background: #f2f2f2; border: 2px solid #ffd166;
-      margin-bottom: 4px;
+      width: 130px; height: 130px; object-fit: cover;
+      border-radius: 50%;
+      border: 2.5px solid var(--accent);
+      background: #f7f8fa;
+      margin-bottom: 14px;
+      margin-top: 6px;
     }
     .profile-pic-label span {
-      color: #28507c; font-size: 0.97rem; text-decoration: underline;
-    }
-    .fd-form-row {
-      display: flex; flex-direction: column; gap: 5px; margin-bottom: 4px;
-    }
-    .fd-row-2col {
-      flex-direction: row; gap: 14px;
-    }
-    .fd-row-2col > div { flex: 1; }
-    .fd-form-row label {
-      color: #18324b; font-size: 1.03rem; font-weight: 500;
-      margin-bottom: 2px;
-    }
-    .fd-form-row input[type="text"],
-    .fd-form-row input[type="number"],
-    .fd-form-row input[type="email"],
-    .fd-form-row select {
-      background: #f7f8fa; border: 1px solid #eaeaea;
-      border-radius: 7px; padding: 10px;
-      font-size: 1rem; outline: none;
-      transition: border 0.18s;
-    }
-    .fd-form-row input:focus, .fd-form-row select:focus {
-      border: 1.7px solid #ffd166;
-    }
-    .fd-choice-group {
-      display: flex; gap: 12px; margin-top: 2px; flex-wrap: wrap;
-    }
-    .fd-choice-group input[type="radio"] { display: none; }
-    .fd-choice-group label {
-      padding: 6px 16px;
-      border: 1.6px solid #eaeaea;
-      border-radius: 18px;
-      background: #f7f8fa;
-      color: #18324b;
-      font-weight: 500;
+      color: var(--sidebar-bg);
+      font-size: 1rem;
+      text-decoration: underline;
       cursor: pointer;
-      font-size: 0.98rem;
-      transition: all 0.17s;
+      display: block;
+      margin-bottom: 10px;
     }
-    .fd-choice-group input[type="radio"]:checked + label {
-      background: #ffd166;
-      color: #18324b;
-      border-color: #ffd166;
+    .profile-actions {
+      margin-top: 14px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
-    .fd-btn {
-      background: #18324b;
+    .profile-actions input[type="password"], .profile-actions input[type="text"] {
+      width: 100%;
+      background: #f7f8fa;
+      border: 1px solid #eaeaea;
+      border-radius: 6px;
+      padding: 9px 11px;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      outline: none;
+    }
+    .profile-actions .fd-btn {
+      background: var(--sidebar-bg);
       color: #fff;
       border: none;
-      width: 100%;
-      font-size: 1.09rem;
-      font-weight: bold;
-      border-radius: 12px;
-      padding: 13px 0;
-      margin-top: 13px;
-      box-shadow: 0 2px 9px rgba(24,50,75,0.08);
-      cursor: pointer;
-      transition: background 0.19s;
-      letter-spacing: 0.5px;
-    }
-    .fd-btn:hover {
-      background: #28507c;
-    }
-    .fd-btn-row {
-      display: flex; gap: 14px; margin-top: 6px; justify-content: flex-end;
-    }
-    .review-box {
-      background: #f7f8fa;
-      border-radius: 14px;
-      padding: 16px 16px 8px 16px;
-      box-shadow: 0 1px 6px rgba(24,50,75,0.06);
-      margin-bottom: 16px;
-      font-size: 1.01rem;
-      color: #18324b;
-    }
-    .phone-row {
-  display: flex;
-  gap: 7px;
-  width: 100%;
-  min-width: 0;
-}
-.phone-row select {
-  width: 75px;
-  flex-shrink: 0;
-}
-.phone-row input[type="tel"] {
-  flex: 1 1 0%;
-  min-width: 0;
-  box-sizing: border-box;
-}
-    .review-label {
-      font-weight: 600; color: #28507c;
-      margin-right: 4px;
-    }
-    @media (max-width: 540px) {
-      .profile-setup-container { padding: 18px 2vw; }
-      .fd-profile-form { gap: 10px; }
-      .fd-row-2col { flex-direction: column; gap: 7px; }
-      .profile-pic-preview { width: 88px; height: 88px; }
-    }
-    footer {
-      text-align: center;
-      margin: 32px 0 12px 0;
-      color: #18324b;
+      border-radius: 8px;
+      padding: 10px 0;
       font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .profile-actions .fd-btn:hover {
+      background: #457bee;
+    }
+    /* Right column: profile form */
+    .profile-main-form {
+      flex: 1;
+      padding-left: 12px;
+    }
+    .form-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: var(--sidebar-bg);
+    }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 26px;
+      margin-bottom: 24px;
+    }
+    .profile-grid label {
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+      color: #1c3253;
+    }
+    .profile-grid input[type="text"],
+    .profile-grid input[type="email"],
+    .profile-grid input[type="number"],
+    .profile-grid input[type="tel"],
+    .profile-grid select,
+    .profile-grid textarea {
+      width: 100%;
+      background: #f7f8fa;
+      border: 1px solid #eaeaea;
+      border-radius: 7px;
+      padding: 10px 11px;
+      font-size: 1rem;
+      margin-top: 2px;
+      outline: none;
+      transition: border 0.17s;
+    }
+    .profile-grid input:focus, .profile-grid select:focus, .profile-grid textarea:focus {
+      border: 1.7px solid var(--accent);
+    }
+    .profile-grid textarea {
+      min-height: 44px;
+      resize: vertical;
+    }
+    .form-section-title {
+      font-weight: 600;
+      font-size: 1.13rem;
+      margin: 24px 0 10px 0;
+      color: #457bee;
+      grid-column: 1/-1;
+    }
+    .profile-save-btn {
+      background: var(--accent);
+      color: var(--sidebar-bg);
+      border: none;
+      border-radius: 9px;
+      font-weight: bold;
+      font-size: 1.12rem;
+      padding: 14px 36px;
+      box-shadow: 0 2px 9px rgba(24,50,75,0.07);
+      cursor: pointer;
+      letter-spacing: 0.4px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      transition: background 0.18s;
+    }
+    .profile-save-btn:hover {
+      background: #ffe496;
+      color: #244987;
+    }
+    @media (max-width: 990px) {
+      .dashboard-layout { flex-direction: column; }
+      .sidebar { flex-direction: row; width: 100vw; height: auto; border-right: none; }
+      .sidebar-logo { justify-content: left; }
+      .profile-setup-dashboard { flex-direction: column; min-width: 0; padding: 14px 2vw; }
+      .profile-sidebar { border-right: none; border-bottom: 1.5px solid #eaeaea; padding: 0 0 18px 0; }
+      .profile-main-form { padding: 0; }
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 650px) {
+      .profile-setup-dashboard { padding: 0 0 28px 0; width: 98vw; }
+      .sidebar { display: none; }
     }
   </style>
 </head>
 <body>
-  <header class="fd-header">
-    <img src="images/freshdine_logo.png" class="fd-logo" alt="FreshDine Logo">
-    <nav>
-      <ul>
-        <li><a href="#">How It Works</a></li>
-        <li><a href="#">Meal Plans</a></li>
-        <li><a href="#">About</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="Pictures/photo_2025-05-15_12-16-12.jpg" alt="FreshDine Logo">
+        <span>FreshDine</span>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="Homepage.html">🏠 Home</a></li>
+          <li><a href="meal planning.html">🍽️ Meal Planner</a></li>
+          <li><a href="recipe discovery.html">📖 Recipes</a></li>
+          <li><a href="shopping basket.html">🛒 Basket</a></li>
+          <li><a href="orders.html">📦 Orders</a></li>
+          <li><a href="favorites.html">❤️ Favorites</a></li>
+          <li><a href="#" class="active">👤 Profile Setup</a></li>
+          <li><a href="about.html">ℹ️ About</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        &copy; 2025 FreshDine
+      </div>
+    </aside>
 
-  <main>
-    <section class="profile-setup-container">
-      <form class="fd-profile-form" id="profileForm" enctype="multipart/form-data">
-        <div id="step1">
-          <h2>Create Your Profile</h2>
-          <div class="fd-step">Step 1 of 2 Personal Info</div>
-          <div class="fd-progress-bar"><div class="fd-progress" style="width: 50%"></div></div>
-
-          <!-- Profile Picture -->
-          <div class="profile-pic-upload">
-            <label for="avatar" class="profile-pic-label">
-              <img src="images/default_avatar.png" alt="Profile Preview" class="profile-pic-preview" id="avatarPreview" style="border: 2px solid #ffd166;">
-              <span>Upload Photo</span>
-            </label>
-            <input type="file" id="avatar" name="avatar" accept="image/*" style="display:none;" onchange="loadPreview(event)">
-          </div>
-
-          <!-- Name, Age -->
-          <div class="fd-row-2col fd-form-row">
-            <div>
-              <label for="name">Name</label>
-              <input type="text" id="name" name="fullname">
-            </div>
-            <div>
-              <label for="age">Age</label>
-              <input type="number" id="age" name="age" min="12" max="120">
-            </div>
-          </div>
-
-          <!-- Email, Phone -->
-          <div class="fd-row-2col fd-form-row">
-            <div>
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email">
-            </div>
-            <div>
-              <label for="phone">Phone</label>
-              <div class="phone-row">
-                <select id="countryCode" name="countryCode">
-                  <option value="+49">+49 (DE)</option>
-                  <option value="+234">+234 (NG)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+1">+1 (US)</option>
-                </select>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]+" placeholder="Phone">
-              </div>
-            </div>
-          </div>
-
-          <!-- Gender, Profession -->
-          <div class="fd-row-2col fd-form-row">
-            <div>
-              <label for="gender">Gender</label>
-              <select id="gender" name="gender">
-                <option value="">--Select--</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="nonbinary">Non-binary</option>
-                <option value="other">Other</option>
-              </select>
-              <input type="text" id="other-gender-text" name="other-gender-text" placeholder="Type here" style="display:none; margin-top:6px;">
-            </div>
-            <div>
-              <label for="profession">Profession</label>
-              <select id="profession" name="profession">
-                <option value="">--Select--</option>
-                <option value="student">Student</option>
-                <option value="professional">Professional</option>
-                <option value="gamer">Gamer</option>
-                <option value="other">Other</option>
-              </select>
-              <input type="text" id="other-profession-text" name="other-profession-text" placeholder="Type here" style="display:none; margin-top:6px;">
-            </div>
-          </div>
-
-          <!-- Address (All on different lines) -->
-          <div class="fd-form-row">
-            <label for="street">Street</label>
-            <input type="text" id="street" name="street">
-          </div>
-          <div class="fd-row-2col fd-form-row">
-            <div>
-              <label for="city">City</label>
-              <input type="text" id="city" name="city">
-            </div>
-            <div>
-              <label for="zip">Zip Code</label>
-              <input type="text" id="zip" name="zip">
-            </div>
-          </div>
-          <div class="fd-row-2col fd-form-row">
-            <div>
-              <label for="state">State</label>
-              <input type="text" id="state" name="state">
-            </div>
-            <div>
-              <label for="country">Country</label>
-              <input type="text" id="country" name="country">
-            </div>
-          </div>
-
-          <!-- Navigation Buttons -->
-          <div class="fd-btn-row">
-            <button type="button" class="fd-btn" onclick="showStep(2)">Next</button>
-            <button type="button" class="fd-btn" onclick="showStep(2)">Preview Step 2</button>
+    <!-- Main Profile Setup -->
+    <main class="main-content">
+      <form class="profile-setup-dashboard" id="profileForm" autocomplete="off">
+        <!-- Profile Photo and Actions -->
+        <div class="profile-sidebar">
+          <label for="avatar" class="profile-pic-label">
+            <img src="images/default_avatar.png" class="profile-pic-preview" id="avatarPreview" alt="Profile Photo">
+            <span>Upload Photo</span>
+          </label>
+          <input type="file" id="avatar" name="avatar" accept="image/*" style="display:none;" onchange="loadPreview(event)">
+          <div class="profile-actions">
+            <input type="password" id="password" placeholder="New Password">
+            <input type="password" id="password2" placeholder="Confirm Password">
+            <button type="button" class="fd-btn" onclick="alert('Password updated!')">Change Password</button>
           </div>
         </div>
-
-        <!-- Step 2 (MOVED inside the form!) -->
-        <div id="step2" style="display:none;">
-          <h2>Your Preferences</h2>
-          <div class="fd-step">Step 2 of 2 <span class="step-info">Preferences & Review</span></div>
-          <div class="fd-progress-bar"><div class="fd-progress" style="width: 100%"></div></div>
-          <!-- Dietary Preferences -->
-          <div class="fd-form-row">
-            <label>Dietary Preferences</label>
-            <div class="fd-choice-group">
-  <label><input type="checkbox" id="vegan" name="diet" value="Vegan"> Vegan</label>
-  <label><input type="checkbox" id="vegetarian" name="diet" value="Vegetarian"> Vegetarian</label>
-  <label><input type="checkbox" id="halal" name="diet" value="Halal"> Halal</label>
-  <label><input type="checkbox" id="glutenfree" name="diet" value="Gluten-Free"> Gluten-Free</label>
-  <label><input type="checkbox" id="dairyfree" name="diet" value="Dairy-Free"> Dairy-Free</label>
-  <label><input type="checkbox" id="none-diet" name="diet" value="None"> None</label>
-</div>
-
-            
+        <!-- Profile Fields -->
+        <div class="profile-main-form">
+          <div class="form-title">Profile Information</div>
+          <div class="profile-grid">
+            <label for="fullname">Full Name
+              <input type="text" id="fullname" name="fullname" required>
+            </label>
+            <label for="email">Email Address
+              <input type="email" id="email" name="email" required>
+            </label>
+            <label for="phone">Phone Number
+              <input type="tel" id="phone" name="phone" placeholder="+49 123456789">
+            </label>
+            <label for="age">Age
+              <input type="number" id="age" name="age" min="12" max="120">
+            </label>
+            <label for="gender">Gender
+              <select id="gender" name="gender">
+                <option value="">--Select--</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Non-binary</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label for="profession">Profession
+              <input type="text" id="profession" name="profession" placeholder="e.g. Student, Professional">
+            </label>
+            <label for="address">Address
+              <input type="text" id="address" name="address" placeholder="123 Main St, City, Country">
+            </label>
+            <label for="diet">Dietary Preferences
+              <select id="diet" name="diet" multiple size="3">
+                <option value="vegan">Vegan</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="halal">Halal</option>
+                <option value="glutenfree">Gluten-Free</option>
+                <option value="dairyfree">Dairy-Free</option>
+                <option value="none">None</option>
+              </select>
+            </label>
+            <label for="goal">Goal
+              <select id="goal" name="goal">
+                <option value="">--Select--</option>
+                <option>Lose weight</option>
+                <option>Maintain weight</option>
+                <option>Gain weight</option>
+                <option>Explore new meals</option>
+              </select>
+            </label>
+            <label for="box">Box Type
+              <select id="box" name="box">
+                <option value="">--Select--</option>
+                <option>Family Box</option>
+                <option>Single Box</option>
+                <option>Couple Box</option>
+                <option>Polyamory Box</option>
+                <option>Bestie Box</option>
+              </select>
+            </label>
+            <label for="allergies" class="form-section-title">Allergies / Special Restrictions
+              <textarea id="allergies" name="allergies" rows="2" placeholder="e.g. peanuts, lactose, seafood..."></textarea>
+            </label>
+            <label for="bio" class="form-section-title">Short Bio / About You
+              <textarea id="bio" name="bio" rows="3" placeholder="Tell us something about you!"></textarea>
+            </label>
           </div>
-          <!-- Goals -->
-          <div class="fd-form-row">
-            <label>Goals</label>
-            <div class="fd-choice-group">
-              <input type="radio" id="goal-lose" name="goal" value="Lose weight"><label for="goal-lose">Lose weight</label>
-              <input type="radio" id="goal-maintain" name="goal" value="Maintain weight"><label for="goal-maintain">Maintain weight</label>
-              <input type="radio" id="goal-gain" name="goal" value="Gain weight"><label for="goal-gain">Gain weight</label>
-              <input type="radio" id="goal-explore" name="goal" value="Explore new meals"><label for="goal-explore">Explore new meals</label>
-            </div>
-          </div>
-          <!-- Box Size/Type -->
-          <div class="fd-form-row">
-            <label>Box Type</label>
-            <div class="fd-choice-group">
-              <input type="radio" id="box-family" name="box" value="Family Box"><label for="box-family">Family Box</label>
-              <input type="radio" id="box-single" name="box" value="Single Box"><label for="box-single">Single Box</label>
-              <input type="radio" id="box-couple" name="box" value="Couple Box"><label for="box-couple">Couple Box</label>
-              <input type="radio" id="box-poly" name="box" value="Polyamory Box"><label for="box-poly">Polyamory Box</label>
-              <input type="radio" id="box-bestie" name="box" value="Bestie Box"><label for="box-bestie">Bestie Box</label>
-            </div>
-          </div>
-          <!-- Allergies -->
-          <div class="fd-form-row">
-            <label for="allergies">Allergies or Special Restrictions</label>
-            <textarea id="allergies" name="allergies" rows="3" placeholder="e.g. peanuts, lactose, seafood..."></textarea>
-          </div>
-          <!-- Review -->
-          <div class="fd-form-row">
-            <label>Review Your Info</label>
-            <div class="review-box" id="reviewBox"></div>
-          </div>
-          <div class="fd-btn-row">
-            <button type="button" class="fd-btn" onclick="showStep(1)">Back</button>
-            <button type="submit" class="fd-btn">Confirm & Save</button>
+          <button type="submit" class="profile-save-btn">Save Profile</button>
+          <div id="settingsConfirm" style="display:none; color:#0b8457;background:#f4fff7;border-radius:9px;padding:9px 14px;margin-top:18px;text-align:center;border:1px solid #c2f6dd;font-size:1.07rem;">
+            Profile updated successfully!
           </div>
         </div>
       </form>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 FreshDine. All rights reserved.</p>
-  </footer>
+    </main>
+  </div>
   <script>
-    // Show/hide steps
-    function showStep(step) {
-      document.getElementById('step1').style.display = (step === 1) ? '' : 'none';
-      document.getElementById('step2').style.display = (step === 2) ? '' : 'none';
-      if (step === 2) fillReview();
-    }
     // Profile photo preview
     function loadPreview(event) {
       const output = document.getElementById('avatarPreview');
       output.src = URL.createObjectURL(event.target.files[0]);
       output.onload = function() { URL.revokeObjectURL(output.src) }
     }
-    // Show other textboxes for gender/profession (for select, not radio)
-    document.getElementById('gender').addEventListener('change', function() {
-      document.getElementById('other-gender-text').style.display =
-        (this.value === 'other') ? 'block' : 'none';
-    });
-    document.getElementById('profession').addEventListener('change', function() {
-      document.getElementById('other-profession-text').style.display =
-        (this.value === 'other') ? 'block' : 'none';
-    });
-
-    // Collect and show the review summary on step 2
-    function fillReview() {
-      const getVal = id => document.getElementById(id)?.value || '';
-      // Dietary preferences (checkbox group)
-      const dietChecked = Array.from(document.querySelectorAll('input[name="diet"]:checked'))
-        .map(cb => cb.labels[0].innerText).join(', ') || 'None';
-      // Helper for radio values
-      const radioVal = name => {
-        const checked = document.querySelector('input[name="' + name + '"]:checked');
-        if (!checked) return '';
-        return checked.value;
-      };
-      // Address formatted
-      const address =
-        (getVal('street') ? getVal('street') + ', ' : '') +
-        (getVal('city') ? getVal('city') + ', ' : '') +
-        (getVal('zip') ? getVal('zip') + ', ' : '') +
-        (getVal('state') ? getVal('state') + ', ' : '') +
-        (getVal('country') ? getVal('country') : '');
-
-      // Phone with country code
-      const countryCode = getVal('countryCode');
-      const phone = getVal('phone');
-      // Fill review box
-      document.getElementById('reviewBox').innerHTML = `
-        <div><span class="review-label">Name:</span> ${getVal('name')}</div>
-        <div><span class="review-label">Age:</span> ${getVal('age')}</div>
-        <div><span class="review-label">Email:</span> ${getVal('email')}</div>
-        <div><span class="review-label">Phone:</span> ${countryCode} ${phone}</div>
-        <div><span class="review-label">Gender:</span> ${getVal('gender') === 'other' ? 'Other: ' + getVal('other-gender-text') : getVal('gender')}</div>
-        <div><span class="review-label">Profession:</span> ${getVal('profession') === 'other' ? 'Other: ' + getVal('other-profession-text') : getVal('profession')}</div>
-        <div><span class="review-label">Address:</span> ${address}</div>
-        <div><span class="review-label">Diet:</span> ${dietChecked}</div>
-        <div><span class="review-label">Goals:</span> ${radioVal('goal')}</div>
-        <div><span class="review-label">Box Type:</span> ${radioVal('box')}</div>
-        <div><span class="review-label">Allergies:</span> ${getVal('allergies')}</div>
-      `;
-    }
-
-    // (Optional) Prevent form submission for demo
+    // Show "Saved" message on submit (demo)
     document.getElementById('profileForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Profile saved! (Demo only)');
+      document.getElementById('settingsConfirm').style.display = "block";
+      setTimeout(() => {
+        document.getElementById('settingsConfirm').style.display = "none";
+      }, 2600);
     });
   </script>
 </body>

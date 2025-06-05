@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - FreshDine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #244987;
+      --accent: #ffd166;
+      --bg: #f7faff;
+      --white: #fff;
+      --gray: #e5e9f2;
+      --text: #193156;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+    }
+    header {
+      background: var(--primary);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 38px;
+    }
+    .fd-logo img {
+      height: 42px;
+      vertical-align: middle;
+    }
+    nav {
+      display: flex; gap: 30px;
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.07rem;
+      transition: color 0.18s;
+    }
+    nav a:hover { color: var(--accent);}
+    .about-container {
+      max-width: 980px;
+      margin: 45px auto 0 auto;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 38px 28px 38px 28px;
+      box-shadow: 0 4px 16px rgba(36,73,135,0.07);
+    }
+    .about-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .about-header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+    .about-header .about-lead {
+      font-size: 1.18rem;
+      color: #457bee;
+      margin-bottom: 14px;
+      margin-top: 3px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .about-header .about-quote {
+      font-size: 1.06rem;
+      color: #244987;
+      margin-top: 12px;
+      font-style: italic;
+      opacity: 0.92;
+    }
+    .quick-facts {
+      display: flex;
+      gap: 38px;
+      justify-content: center;
+      margin: 30px 0 25px 0;
+      flex-wrap: wrap;
+    }
+    .fact-box {
+      background: var(--bg);
+      padding: 18px 19px;
+      border-radius: 9px;
+      min-width: 170px;
+      box-shadow: 0 1px 5px rgba(36,73,135,0.07);
+      color: var(--primary);
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.06rem;
+    }
+    .team-section {
+      display: flex;
+      gap: 34px;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .team-member {
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow: 0 1px 7px rgba(36,73,135,0.08);
+      flex: 1 1 260px;
+      max-width: 320px;
+      padding: 26px 18px;
+      text-align: center;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .team-member img {
+      width: 105px;
+      height: 105px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 13px;
+      border: 3px solid var(--accent);
+      background: #eee;
+    }
+    .member-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    .member-role {
+      color: #457bee;
+      font-weight: 500;
+      margin-bottom: 7px;
+    }
+    .member-desc {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 11px;
+    }
+    .member-quote {
+      font-size: 0.99rem;
+      color: #7a93ba;
+      font-style: italic;
+      margin-top: 3px;
+    }
+    .about-footer {
+      margin-top: 38px;
+      text-align: center;
+      color: #244987;
+      font-weight: 500;
+      font-size: 1.09rem;
+    }
+    @media (max-width: 700px) {
+      .team-section { flex-direction: column; gap: 20px; }
+      .about-container { padding: 18px 4vw 20px 4vw; }
+      .quick-facts { gap: 18px; }
+    }
+    footer {
+      text-align: center;
+      background: var(--gray);
+      color: #193156;
+      font-size: 1rem;
+      padding: 16px 0 10px 0;
+      margin-top: 44px;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="fd-logo"><img src="Pictures/photo_2025-05-15_12-16-12.jpg" alt="FreshDine Logo"></div>
+    <nav>
+      <a href="Homepage.html">Home</a>
+      <a href="meal planning.html">Meal Plans</a>
+      <a href="profile.html">Profile</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html" style="color:var(--accent);font-weight:600;">About Us</a>
+    </nav>
+  </header>
+  <main>
+    <section class="about-container">
+      <div class="about-header">
+        <h1>About FreshDine</h1>
+        <div class="about-lead">
+          FreshDine is your smart companion for meal planning and ingredient delivery. We help you eat better, save time, and enjoy food—whether you’re a student, professional, or just someone who wants to make healthy eating simple.
+        </div>
+        <div class="about-quote">
+          “We started FreshDine because we believe great food should be joyful, healthy, and never a hassle.”
+        </div>
+      </div>
+
+      <div class="quick-facts">
+        <div class="fact-box">
+          <strong>Founded in 2025</strong><br>in Baden-Württemberg, Germany
+        </div>
+        <div class="fact-box">
+          <strong>100+ recipes</strong><br>to discover and customize
+        </div>
+        <div class="fact-box">
+          <strong>Personalized meal plans</strong><br>for every lifestyle
+        </div>
+      </div>
+
+      <div style="margin:28px 0 10px 0; font-size:1.13rem; text-align:center;">
+        <b>Our Mission:</b>  
+        <span style="color:#457bee">To take the stress out of healthy eating and make good food easy and enjoyable for everyone.</span>
+      </div>
+
+      <div class="team-section">
+        <!-- Member 1: Chinelo -->
+        <div class="team-member">
+          <img src="Pictures/chinelo_photo.jpg" alt="Chinelo Nweke"> <!-- Change for your image -->
+          <div class="member-name">Chinelo Nweke</div>
+          <div class="member-role">Co-founder, Data & BI Analyst</div>
+          <div class="member-desc">
+            Chinelo is an International Business Information Systems student at Furtwangen University, specializing in business analytics and data-driven decision making. She’s passionate about helping others achieve healthier lifestyles by making sense of food and nutrition data.
+          </div>
+          <div class="member-quote">
+            “Working with Denzel, I love how every challenge becomes an opportunity to learn and create something meaningful for our users.”
+          </div>
+        </div>
+        <!-- Member 2: Denzel -->
+        <div class="team-member">
+          <img src="Pictures/denzel_photo.jpg" alt="Denzel Pragassa"> <!-- Change for your image -->
+          <div class="member-name">Denzel Pragassa</div>
+          <div class="member-role">Co-founder, Software Engineer</div>
+          <div class="member-desc">
+            Denzel, studies International Business Information Systems student at Furtwangen University, brings a passion for seamless tech and user-friendly web experiences. He aims to empower people with intuitive tools for meal planning, shopping, and recipe discovery.
+          </div>
+          <div class="member-quote">
+            “Chinelo inspires me to always put our users first—FreshDine is about real people, real needs, and real food joy!”
+          </div>
+        </div>
+      </div>
+
+      <div class="about-footer">
+        Have questions? <a href="contact.html" style="color:#457bee; text-decoration:underline;">Contact us here</a>.<br>
+        <span style="font-size:0.98rem; color:#7a93ba;">Together, we believe food should be simple, fun, and accessible—powered by tech and teamwork.</span>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 FreshDine | <a href="contact.html" style="color:#244987;text-decoration:underline;">Contact Us</a>
+  </footer>
+</body>
+</html>

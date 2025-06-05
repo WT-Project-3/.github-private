@@ -1,4 +1,35 @@
 /* ===== Reset & Basics ===== */
+:root {
+  --grid-gutter: 20px;
+  --grid-columns: 12;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gutter);
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+
+.grid-span-12 { grid-column: span 12; }
+.grid-span-8 { grid-column: span 8; }
+.grid-span-6 { grid-column: span 6; }
+.grid-span-4 { grid-column: span 4; }
+.grid-span-3 { grid-column: span 3; }
+.grid-span-2 { grid-column: span 2; }
+
+@media (max-width: 900px) {
+  .page-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .grid-span-12, .grid-span-8, .grid-span-6, .grid-span-4, .grid-span-3, .grid-span-2 { grid-column: span 2; }
+}
+@media (max-width: 540px) {
+  .page-grid { grid-template-columns: 1fr; gap: 10px; padding: 0 5vw;}
+  .grid-span-12, .grid-span-8, .grid-span-6, .grid-span-4, .grid-span-3, .grid-span-2 { grid-column: span 1; }
+}
+
 * {
   margin: 0;
   padding: 0;

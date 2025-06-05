@@ -24,7 +24,7 @@
       display: flex;
       min-height: 100vh;
     }
-    /* --- SIDEBAR --- */
+    /* Sidebar */
     .sidebar {
       width: 220px;
       background: var(--sidebar-bg);
@@ -32,7 +32,6 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      padding: 0;
     }
     .sidebar-logo {
       display: flex;
@@ -85,65 +84,76 @@
       padding: 20px 0 8px 0;
       border-top: 1px solid #2d4579;
     }
-    /* --- MAIN CONTENT --- */
+    /* Main */
     .main-content {
       flex: 1;
-      padding: 42px 0 0 0;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 0;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 42px 0;
     }
     .profile-setup-dashboard {
       display: flex;
       background: #fff;
       border-radius: 18px;
       box-shadow: 0 4px 20px rgba(36, 73, 135, 0.10);
-      width: 85vw;
-      max-width: 1100px;
-      margin: 0 auto 44px auto;
-      min-height: 680px;
-      padding: 38px 32px 36px 32px;
-      gap: 36px;
+      width: 90vw;
+      max-width: 1150px;
+      min-height: 660px;
+      padding: 38px 40px;
+      gap: 38px;
+      align-items: flex-start;
     }
-    /* Left column: photo + actions */
+    /* Profile photo & password (left column) */
     .profile-sidebar {
-      width: 260px;
+      width: 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
       border-right: 1.5px solid #eaeaea;
-      padding-right: 32px;
+      padding-right: 40px;
+    }
+    .profile-pic-label {
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
     }
     .profile-pic-preview {
-      width: 130px; height: 130px; object-fit: cover;
-      border-radius: 50%;
+      width: 260px; 
+      height: 160px; 
+      object-fit: cover;
+      border-radius: 16px;
       border: 2.5px solid var(--accent);
       background: #f7f8fa;
-      margin-bottom: 14px;
+      margin-bottom: 7px;
       margin-top: 6px;
+      box-shadow: 0 2px 8px rgba(36,73,135,0.04);
+      transition: border 0.18s;
     }
     .profile-pic-label span {
       color: var(--sidebar-bg);
-      font-size: 1rem;
+      font-size: 1.07rem;
       text-decoration: underline;
       cursor: pointer;
-      display: block;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .profile-actions {
-      margin-top: 14px;
+      margin-top: 16px;
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
-    .profile-actions input[type="password"], .profile-actions input[type="text"] {
+    .profile-actions input[type="password"] {
       width: 100%;
       background: #f7f8fa;
       border: 1px solid #eaeaea;
       border-radius: 6px;
-      padding: 9px 11px;
+      padding: 10px 12px;
       font-size: 1rem;
       margin-bottom: 8px;
       outline: none;
@@ -162,26 +172,26 @@
     .profile-actions .fd-btn:hover {
       background: #457bee;
     }
-    /* Right column: profile form */
+    /* Profile info form (right column) */
     .profile-main-form {
       flex: 1;
-      padding-left: 12px;
+      padding-left: 28px;
     }
     .form-title {
-      font-size: 1.4rem;
+      font-size: 1.32rem;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 18px;
       color: var(--sidebar-bg);
     }
     .profile-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px 26px;
-      margin-bottom: 24px;
+      gap: 22px 32px;
+      margin-bottom: 30px;
     }
     .profile-grid label {
       font-weight: 500;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       display: block;
       color: #1c3253;
     }
@@ -205,13 +215,13 @@
       border: 1.7px solid var(--accent);
     }
     .profile-grid textarea {
-      min-height: 44px;
+      min-height: 38px;
       resize: vertical;
     }
     .form-section-title {
       font-weight: 600;
       font-size: 1.13rem;
-      margin: 24px 0 10px 0;
+      margin: 22px 0 6px 0;
       color: #457bee;
       grid-column: 1/-1;
     }
@@ -221,31 +231,28 @@
       border: none;
       border-radius: 9px;
       font-weight: bold;
-      font-size: 1.12rem;
-      padding: 14px 36px;
+      font-size: 1.13rem;
+      padding: 13px 36px;
       box-shadow: 0 2px 9px rgba(24,50,75,0.07);
       cursor: pointer;
       letter-spacing: 0.4px;
-      margin-top: 18px;
-      margin-bottom: 8px;
+      margin-top: 8px;
+      margin-bottom: 10px;
       transition: background 0.18s;
     }
     .profile-save-btn:hover {
       background: #ffe496;
       color: #244987;
     }
-    @media (max-width: 990px) {
-      .dashboard-layout { flex-direction: column; }
-      .sidebar { flex-direction: row; width: 100vw; height: auto; border-right: none; }
-      .sidebar-logo { justify-content: left; }
-      .profile-setup-dashboard { flex-direction: column; min-width: 0; padding: 14px 2vw; }
-      .profile-sidebar { border-right: none; border-bottom: 1.5px solid #eaeaea; padding: 0 0 18px 0; }
-      .profile-main-form { padding: 0; }
-      .profile-grid { grid-template-columns: 1fr; }
+    @media (max-width: 1100px) {
+      .profile-setup-dashboard { flex-direction: column; gap:18px; }
+      .profile-sidebar { border-right: none; border-bottom: 1.5px solid #eaeaea; padding-right: 0; margin-bottom:22px;}
+      .main-content { padding: 22px 0; }
     }
-    @media (max-width: 650px) {
-      .profile-setup-dashboard { padding: 0 0 28px 0; width: 98vw; }
+    @media (max-width: 800px) {
+      .profile-setup-dashboard { width: 99vw; padding:12px 2vw;}
       .sidebar { display: none; }
+      .profile-main-form { padding:0; }
     }
   </style>
 </head>
@@ -263,11 +270,11 @@
           <li><a href="meal planning.html">🍽️ Meal Planner</a></li>
           <li><a href="recipe discovery.html">📖 Recipes</a></li>
           <li><a href="shopping basket.html">🛒 Basket</a></li>
-          <li><a href="orders.html">📦 Orders</a></li>
-          <li><a href="favorites.html">❤️ Favorites</a></li>
+          <li><a href="order history.html">📦 Orders</a></li>
+          <li><a href="favourite.html">❤️ Favorites</a></li>
           <li><a href="#" class="active">👤 Profile Setup</a></li>
-          <li><a href="about.html">ℹ️ About</a></li>
-          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="About Us.html">ℹ️ About</a></li>
+          <li><a href="Contact us page.html">✉️ Contact</a></li>
         </ul>
       </nav>
       <div class="sidebar-footer">
@@ -278,7 +285,7 @@
     <!-- Main Profile Setup -->
     <main class="main-content">
       <form class="profile-setup-dashboard" id="profileForm" autocomplete="off">
-        <!-- Profile Photo and Actions -->
+        <!-- Profile Photo and Passwords (side column) -->
         <div class="profile-sidebar">
           <label for="avatar" class="profile-pic-label">
             <img src="images/default_avatar.png" class="profile-pic-preview" id="avatarPreview" alt="Profile Photo">
@@ -291,7 +298,7 @@
             <button type="button" class="fd-btn" onclick="alert('Password updated!')">Change Password</button>
           </div>
         </div>
-        <!-- Profile Fields -->
+        <!-- Main Profile Form -->
         <div class="profile-main-form">
           <div class="form-title">Profile Information</div>
           <div class="profile-grid">
@@ -306,6 +313,12 @@
             </label>
             <label for="age">Age
               <input type="number" id="age" name="age" min="12" max="120">
+            </label>
+            <label for="height">Height (cm)
+              <input type="number" id="height" name="height" min="50" max="300" placeholder="e.g. 170">
+            </label>
+            <label for="weight">Weight (kg)
+              <input type="number" id="weight" name="weight" min="20" max="300" placeholder="e.g. 60">
             </label>
             <label for="gender">Gender
               <select id="gender" name="gender">
@@ -323,7 +336,8 @@
               <input type="text" id="address" name="address" placeholder="123 Main St, City, Country">
             </label>
             <label for="diet">Dietary Preferences
-              <select id="diet" name="diet" multiple size="3">
+              <select id="diet" name="diet">
+                <option value="">--Select--</option>
                 <option value="vegan">Vegan</option>
                 <option value="vegetarian">Vegetarian</option>
                 <option value="halal">Halal</option>
@@ -379,7 +393,7 @@
       document.getElementById('settingsConfirm').style.display = "block";
       setTimeout(() => {
         document.getElementById('settingsConfirm').style.display = "none";
-      }, 2600);
+      }, 2500);
     });
   </script>
 </body>

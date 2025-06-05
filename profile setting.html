@@ -5,179 +5,316 @@
   <title>Profile Settings - FreshDine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --sidebar-bg: #2958a5;
+      --sidebar-active: #3d74d4;
+      --main-bg: #f6f9fb;
+      --box-bg: #fff;
+      --accent: #ffd166;
+      --primary-text: #18324b;
+      --menu-text: #fff;
+      --border: #e0e9f1;
+    }
     body {
-      background: #f6f9fb;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--main-bg);
+      color: var(--primary-text);
     }
-    .settings-container {
-      max-width: 440px;
-      margin: 48px auto;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(24, 50, 75, 0.09);
-      padding: 38px 28px 32px 28px;
+    .settings-dashboard {
+      display: flex;
+      min-height: 100vh;
     }
-    .settings-title {
-      text-align: center;
-      font-size: 2rem;
-      color: #18324b;
-      font-weight: bold;
-      margin-bottom: 22px;
-    }
-    .profile-pic-upload {
-      display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;
-    }
-    .profile-pic-label {
-      cursor: pointer;
+    /* Sidebar */
+    .sidebar {
+      width: 235px;
+      background: var(--sidebar-bg);
+      color: var(--menu-text);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
+      padding-top: 38px;
+      box-shadow: 2px 0 12px rgba(41,88,165,0.04);
     }
-    .profile-pic-preview {
-      width: 106px; height: 106px; object-fit: cover;
-      border-radius: 50%; background: #f2f2f2; border: 2px solid #ffd166;
-      margin-bottom: 6px;
-      transition: border 0.17s;
+    .sidebar .avatar-large {
+      width: 120px;
+      height: 160px;
+      background: #e8eaf6;
+      border-radius: 22px;
+      object-fit: cover;
+      margin-bottom: 18px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 2px 12px rgba(41,88,165,0.06);
+      display: block;
     }
-    .profile-pic-label span {
-      color: #28507c; font-size: 0.97rem; text-decoration: underline;
+    .sidebar .user-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      margin-top: 4px;
+      text-align: center;
     }
-    .settings-form {
-      display: flex; flex-direction: column; gap: 18px;
+    .sidebar nav {
+      width: 100%;
     }
-    .settings-form label {
-      color: #18324b;
-      font-size: 1.05rem;
-      font-weight: 500;
-      margin-bottom: 2px;
-    }
-    .settings-form input[type="text"], .settings-form input[type="email"], .settings-form input[type="password"] {
-      background: #f7f8fa; border: 1.2px solid #eaeaea;
-      border-radius: 7px; padding: 12px 12px;
-      font-size: 1.05rem; outline: none;
-      margin-top: 2px;
-      transition: border 0.18s;
-    }
-    .settings-form input:focus {
-      border: 1.7px solid #ffd166;
-    }
-    .settings-form .password-row {
+    .sidebar nav a {
       display: flex;
       align-items: center;
-      gap: 9px;
+      padding: 13px 34px;
+      color: var(--menu-text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08rem;
+      border-left: 3px solid transparent;
+      transition: background 0.15s, border 0.17s;
+      gap: 10px;
     }
-    .toggle-password {
-      cursor: pointer;
-      font-size: 1.18rem;
-      color: #28507c;
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: var(--sidebar-active);
+      border-left: 3px solid var(--accent);
+      color: #fff;
+    }
+    .sidebar .logout {
+      margin-top: auto;
+      margin-bottom: 30px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .sidebar .logout-btn {
       background: none;
-      border: none;
-      outline: none;
-      margin-top: 2px;
+      border: 1.5px solid #ffd166;
+      color: #ffd166;
+      border-radius: 18px;
+      padding: 8px 26px;
+      font-size: 1.02rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.15s, color 0.14s;
     }
-    .settings-form .settings-btn {
-      background: #18324b;
+    .sidebar .logout-btn:hover {
+      background: #ffd166;
+      color: var(--sidebar-bg);
+    }
+
+    /* Main Content */
+    .settings-main {
+      flex: 1;
+      padding: 56px 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .settings-box {
+      background: var(--box-bg);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(24, 50, 75, 0.07);
+      padding: 40px 34px 30px 34px;
+      display: flex;
+      gap: 44px;
+      min-width: 670px;
+      width: 900px;
+      max-width: 98vw;
+    }
+    .profile-section, .password-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 17px;
+    }
+    .section-title {
+      font-size: 1.13rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #21406c;
+      letter-spacing: 0.3px;
+    }
+    .profile-section label, .password-section label {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+      color: #2a4478;
+    }
+    .profile-section input,
+    .profile-section select,
+    .password-section input {
+      background: #f7f8fa;
+      border: 1.2px solid var(--border);
+      border-radius: 7px;
+      padding: 11px 12px;
+      font-size: 1rem;
+      outline: none;
+      margin-bottom: 4px;
+      width: 100%;
+      transition: border 0.16s;
+    }
+    .profile-section input:focus, .password-section input:focus, .profile-section select:focus {
+      border: 1.7px solid var(--accent);
+    }
+    .profile-fields-row {
+      display: flex;
+      gap: 13px;
+    }
+    .profile-fields-row > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .save-btn {
+      background: #2958a5;
       color: #fff;
       border: none;
       width: 100%;
-      font-size: 1.09rem;
+      font-size: 1.1rem;
       font-weight: bold;
-      border-radius: 11px;
+      border-radius: 12px;
       padding: 13px 0;
-      margin-top: 6px;
-      box-shadow: 0 2px 9px rgba(24,50,75,0.08);
+      margin-top: 9px;
+      box-shadow: 0 2px 9px rgba(41,88,165,0.08);
       cursor: pointer;
       transition: background 0.19s;
       letter-spacing: 0.5px;
     }
-    .settings-form .settings-btn:hover {
-      background: #28507c;
+    .save-btn:hover {
+      background: #3d74d4;
     }
     .settings-confirm {
       color: #0b8457;
       background: #f4fff7;
       border-radius: 9px;
       padding: 9px 14px;
-      margin-top: 15px;
+      margin-top: 10px;
       text-align: center;
       border: 1px solid #c2f6dd;
-      font-size: 1.05rem;
+      font-size: 1.04rem;
       display: none;
     }
-    @media (max-width: 560px) {
-      .settings-container { padding: 15px 2vw; }
-      .profile-pic-preview { width: 72px; height: 72px; }
+    @media (max-width: 980px) {
+      .settings-box { flex-direction: column; min-width: 96vw; width: 98vw; gap: 26px; }
+      .sidebar { min-width: 120px; width: 27vw; }
+    }
+    @media (max-width: 670px) {
+      .settings-main { padding: 20px 0; }
+      .settings-box { padding: 16px 2vw; }
     }
   </style>
 </head>
 <body>
-  <div class="settings-container">
-    <div class="settings-title">Profile Settings</div>
-    <form class="settings-form" id="settingsForm" autocomplete="off">
-      <!-- Profile Photo -->
-      <div class="profile-pic-upload">
-        <label for="avatar" class="profile-pic-label">
-          <img src="images/default_avatar.png" alt="Profile Preview" class="profile-pic-preview" id="avatarPreview">
-          <span>Change Photo</span>
-        </label>
-        <input type="file" id="avatar" name="avatar" accept="image/*" style="display:none;" onchange="loadPreview(event)">
+  <div class="settings-dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="user-name" id="sidebarName">User Name</div>
+      <nav>
+        <a href="#" class="active">Profile Settings</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Meal Plans</a>
+        <a href="#">Orders</a>
+        <a href="#">Favorites</a>
+        <a href="#">Settings</a>
+      </nav>
+      <div class="logout">
+        <button class="logout-btn">Log Out</button>
       </div>
-      <!-- Name -->
-      <div>
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="fullname" placeholder="e.g. jean jan">
-      </div>
-      <!-- Email -->
-      <div>
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="e.g. jeanjan@email.com">
-      </div>
-      <!-- Phone -->
-      <div>
-        <label for="phone">Phone Number</label>
-        <input type="text" id="phone" name="phone" placeholder="+49 123456789">
-      </div>
-      <!-- Password -->
-      <div>
-        <label for="password">Change Password</label>
-        <div class="password-row">
-          <input type="password" id="password" name="password" placeholder="New Password">
-          <button type="button" class="toggle-password" onclick="togglePassword()">
-            👁️
-          </button>
-        </div>
-      </div>
-      <!-- Address -->
-      <div>
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address" placeholder="123 Main St, City, Country">
-      </div>
-      <input type="submit" class="settings-btn" value="Save Changes">
-      <div class="settings-confirm" id="settingsConfirm">Profile updated successfully!</div>
-    </form>
+    </aside>
+    <!-- Main Content -->
+    <main class="settings-main">
+      <form class="settings-box" id="settingsForm" autocomplete="off">
+        <!-- Profile Details -->
+        <section class="profile-section">
+          <div class="section-title">Profile Information</div>
+          <label for="avatarInput">Profile Photo</label>
+          <input type="file" id="avatarInput" accept="image/*" style="margin-bottom:10px">
+          <img src="images/default_avatar.png" alt="Profile Photo" id="profileAvatar" style="width: 100%; max-width: 260px; height: 170px; object-fit: cover; border-radius: 18px; background: #e8eaf6; border:2px solid #ffd166; margin-bottom: 15px;">
+          <div class="profile-fields-row">
+            <div>
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="e.g. Jean Jan">
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="e.g. jeanjan@email.com">
+            </div>
+          </div>
+          <div class="profile-fields-row">
+            <div>
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" placeholder="+49 123456789">
+            </div>
+            <div>
+              <label for="address">Address</label>
+              <input type="text" id="address" placeholder="123 Main St, City, Country">
+            </div>
+          </div>
+          <div class="profile-fields-row">
+            <div>
+              <label for="diet">Dietary Preference</label>
+              <select id="diet">
+                <option value="">Select...</option>
+                <option>Vegan</option>
+                <option>Vegetarian</option>
+                <option>Halal</option>
+                <option>Gluten-Free</option>
+                <option>Dairy-Free</option>
+                <option>None</option>
+              </select>
+            </div>
+            <div>
+              <label for="height">Height (cm)</label>
+              <input type="number" id="height" min="50" max="250" placeholder="e.g. 170">
+            </div>
+            <div>
+              <label for="weight">Weight (kg)</label>
+              <input type="number" id="weight" min="25" max="300" placeholder="e.g. 60">
+            </div>
+          </div>
+          <button type="submit" class="save-btn">Save Changes</button>
+          <div class="settings-confirm" id="settingsConfirm">Profile updated successfully!</div>
+        </section>
+        <!-- Password Section -->
+        <section class="password-section">
+          <div class="section-title">Change Password</div>
+          <label for="oldPass">Old Password</label>
+          <input type="password" id="oldPass" placeholder="Old password">
+          <label for="newPass">New Password</label>
+          <input type="password" id="newPass" placeholder="New password">
+          <label for="confirmPass">Confirm New Password</label>
+          <input type="password" id="confirmPass" placeholder="Repeat new password">
+          <button type="button" class="save-btn" onclick="updatePassword()">Change Password</button>
+          <div class="settings-confirm" id="passConfirm">Password changed!</div>
+        </section>
+      </form>
+    </main>
   </div>
   <script>
-    // Profile photo preview
-    function loadPreview(event) {
-      const output = document.getElementById('avatarPreview');
-      output.src = URL.createObjectURL(event.target.files[0]);
+    // Profile photo preview + sidebar update
+    document.getElementById('avatarInput').addEventListener('change', function(event) {
+      const output = document.getElementById('profileAvatar');
+      const sidebar = document.getElementById('sidebarAvatar');
+      output.src = sidebar.src = URL.createObjectURL(event.target.files[0]);
       output.onload = function() { URL.revokeObjectURL(output.src) }
-    }
-    // Show/hide password
-    function togglePassword() {
-      const input = document.getElementById('password');
-      input.type = input.type === 'password' ? 'text' : 'password';
-    }
-    // Confirm message on submit (demo)
+    });
+    // Update sidebar name with profile name
+    document.getElementById('name').addEventListener('input', function() {
+      document.getElementById('sidebarName').textContent = this.value || 'User Name';
+    });
+    // Save profile settings (simulate)
     document.getElementById('settingsForm').addEventListener('submit', function(e) {
       e.preventDefault();
       document.getElementById('settingsConfirm').style.display = "block";
       setTimeout(() => {
         document.getElementById('settingsConfirm').style.display = "none";
-      }, 2400);
+      }, 2500);
     });
+    // Change password (simulate)
+    function updatePassword() {
+      document.getElementById('passConfirm').style.display = "block";
+      setTimeout(() => {
+        document.getElementById('passConfirm').style.display = "none";
+      }, 2200);
+    }
   </script>
 </body>
 </html>

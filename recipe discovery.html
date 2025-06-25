@@ -1,55 +1,218 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreshDine | Recipe Discovery</title>
-  <link rel="stylesheet" href="freshdine.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f7faff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: #1b3556;
+    }
+    header {
+  background: #244987;
+  padding: 12px 24px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-logo {
+  height: 48px;
+}
+
+nav {
+  display: flex;
+  gap: 24px;
+}
+
+nav a {
+  color: #ffd166;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+    .hero {
+  background: url("food.jpg") center/cover no-repeat;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.3rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 8px 36px 8px;
+    }
+    .recipe-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+    .recipe-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 18px rgba(36,73,135,0.08);
+      width: 340px;
+      padding: 0 0 20px 0;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.17s;
+      position: relative;
+    }
+    .recipe-card:hover {
+      box-shadow: 0 7px 22px rgba(36,73,135,0.16);
+    }
+    .recipe-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+    }
+    .recipe-card h2 {
+      margin: 16px 0 7px 0;
+      font-size: 1.32rem;
+      color: #244987;
+      font-weight: bold;
+      text-align: center;
+    }
+    .recipe-card p {
+      font-size: 1rem;
+      margin: 0 14px 8px 14px;
+      color: #26396b;
+      text-align: center;
+    }
+    .expand-details-btn {
+      margin: 10px 0 0 0;
+      background: #ffd166;
+      color: #244987;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 22px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.16s;
+    }
+    .expand-details-btn:hover {
+      background: #ffe49d;
+    }
+    .recipe-details {
+      width: 95%;
+      background: #f9fafc;
+      border-radius: 8px;
+      margin: 15px auto 5px auto;
+      padding: 13px 10px 9px 12px;
+      display: none;
+      font-size: 0.97rem;
+    }
+    .recipe-details h3 {
+      margin: 8px 0 2px 0;
+      font-size: 1.07rem;
+      color: #244987;
+    }
+    
+    .nutrition {
+      margin: 7px 0 3px 0;
+      padding-left: 12px;
+      color: #28507c;
+      font-size: 0.96rem;
+    }
+    footer {
+      background: #244987;
+      color: #fff;
+      text-align: center;
+      padding: 24px 8px 15px 8px;
+      font-size: 1rem;
+      margin-top: 28px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .recipe-grid { gap: 18px; }
+      .recipe-card { width: 95vw; max-width: 370px; }
+    }
+    @media (max-width: 580px) {
+      .recipe-grid { flex-direction: column; gap: 16px; }
+      .recipe-card { width: 99vw; max-width: 99vw; }
+      header { padding: 22px 0 10px 0; }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>Discover Delicious Recipes</h1>
-  <nav>
-    <a href="Homepage.html">Home</a>
-    <a href="meal planning.html">Meal Planner</a>
-    <a href="profile.html">Profile</a>
-    <a href="checkout.html">Checkout</a>
-  </nav>
+  <div class="nav-container">
+    <img src="Pictures/photo_2025-05-15_12-16-12.jpg" alt="FreshDine Logo" class="site-logo">
+    <nav>
+      <a href="Homepage.html">Home</a>
+      <a href="meal planning.html">Meal Planner</a>
+      <a href="profile.html">Profile</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </div>
 </header>
+
+<section class="hero">FreshDine Recipe Discovery</section>
 
 <main>
   <section class="recipe-grid">
 
-    <!-- Jollof Rice -->
+    <!-- Recipe Template -->
     <article class="recipe-card">
       <img src="Pictures/7499757JollofriceChefJohn4x3-d601da10d7e845d1ad4c8656a5b87ed4.webp" alt="Jollof Rice">
       <h2>Jollof Rice</h2>
       <p>Spicy West African rice dish cooked in a flavorful tomato sauce with chicken thighs.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Rice</li>
-        <li>Tomato paste</li>
-        <li>Bell peppers</li>
-        <li>Onions</li>
-        <li>Chicken thighs</li>
-        <li>Scotch bonnet pepper</li>
-        <li>Stock cubes</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Blend tomatoes, peppers, and onions into a smooth mix.</li>
-        <li>Fry the mixture in oil until rich and thick.</li>
-        <li>Add chicken, seasoning cubes, and stock. Simmer gently.</li>
-        <li>Add washed rice and cook until the liquid is absorbed and the rice is tender.</li>
-        <li>Serve with grilled chicken thigh and garnish with fresh vegetables.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 520</li>
-        <li>Protein: 9g</li>
-        <li>Carbs: 70g</li>
-        <li>Fat: 18g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Rice</li>
+          <li>Tomato paste</li>
+          <li>Bell peppers</li>
+          <li>Onions</li>
+          <li>Chicken thighs</li>
+          <li>Scotch bonnet pepper</li>
+          <li>Stock cubes</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Blend tomatoes, peppers, and onions into a smooth mix.</li>
+          <li>Fry the mixture in oil until rich and thick.</li>
+          <li>Add chicken, seasoning cubes, and stock. Simmer gently.</li>
+          <li>Add washed rice and cook until the liquid is absorbed and the rice is tender.</li>
+          <li>Serve with grilled chicken thigh and garnish with fresh vegetables.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 520</li>
+          <li>Protein: 9g</li>
+          <li>Carbs: 70g</li>
+          <li>Fat: 18g</li>
+        </ul>
+      </div>
     </article>
 
     <!-- Paneer Butter Masala -->
@@ -57,149 +220,176 @@
       <img src="Pictures/paneer-butter-masala-recipe-step-by-step-instructions.jpg" alt="Paneer Butter Masala">
       <h2>Paneer Butter Masala</h2>
       <p>Rich and creamy Indian curry made with paneer, butter, and a spiced tomato sauce.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Paneer (Indian cheese)</li>
-        <li>Butter</li>
-        <li>Tomatoes</li>
-        <li>Cream</li>
-        <li>Ginger & Garlic</li>
-        <li>Spices (garam masala, chili powder, turmeric)</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Sauté onions, garlic, and ginger until golden.</li>
-        <li>Add tomato puree and spices, cook until fragrant.</li>
-        <li>Stir in cream and butter, simmer.</li>
-        <li>Add paneer cubes and simmer for 5 minutes.</li>
-        <li>Serve hot with naan or rice.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 430</li>
-        <li>Protein: 14g</li>
-        <li>Carbs: 22g</li>
-        <li>Fat: 32g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Paneer (Indian cheese)</li>
+          <li>Butter</li>
+          <li>Tomatoes</li>
+          <li>Cream</li>
+          <li>Ginger & Garlic</li>
+          <li>Spices (garam masala, chili powder, turmeric)</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Sauté onions, garlic, and ginger until golden.</li>
+          <li>Add tomato puree and spices, cook until fragrant.</li>
+          <li>Stir in cream and butter, simmer.</li>
+          <li>Add paneer cubes and simmer for 5 minutes.</li>
+          <li>Serve hot with naan or rice.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 430</li>
+          <li>Protein: 14g</li>
+          <li>Carbs: 22g</li>
+          <li>Fat: 32g</li>
+        </ul>
+      </div>
     </article>
+
+    <!-- Add other recipes in the same way ... -->
+    <!-- ... Just copy the structure above for each recipe ... -->
 
     <!-- Spaghetti Carbonara -->
     <article class="recipe-card">
       <img src="Pictures/spaghetti-carbonara.jpg" alt="Spaghetti Carbonara">
       <h2>Spaghetti Carbonara</h2>
       <p>Classic Italian pasta with pancetta, eggs, and Parmesan cheese.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Spaghetti</li>
-        <li>Pancetta</li>
-        <li>Eggs</li>
-        <li>Parmesan cheese</li>
-        <li>Black pepper</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Boil spaghetti until al dente.</li>
-        <li>Fry pancetta until crispy.</li>
-        <li>Whisk eggs and Parmesan together.</li>
-        <li>Toss pasta with pancetta, remove from heat, and stir in egg mixture.</li>
-        <li>Serve immediately with extra Parmesan and pepper.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 570</li>
-        <li>Protein: 21g</li>
-        <li>Carbs: 60g</li>
-        <li>Fat: 28g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Spaghetti</li>
+          <li>Pancetta</li>
+          <li>Eggs</li>
+          <li>Parmesan cheese</li>
+          <li>Black pepper</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Boil spaghetti until al dente.</li>
+          <li>Fry pancetta until crispy.</li>
+          <li>Whisk eggs and Parmesan together.</li>
+          <li>Toss pasta with pancetta, remove from heat, and stir in egg mixture.</li>
+          <li>Serve immediately with extra Parmesan and pepper.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 570</li>
+          <li>Protein: 21g</li>
+          <li>Carbs: 60g</li>
+          <li>Fat: 28g</li>
+        </ul>
+      </div>
     </article>
 
- <article class="recipe-card">
+    <!-- Add other recipes below (Cheeseburger, Vegan Bibimbap, etc.) following the same structure... -->
+
+    <!-- Cheeseburger -->
+    <article class="recipe-card">
       <img src="Pictures/cheeseburger-1.jpg" alt="Classic Cheeseburger">
       <h2>Classic Cheeseburger</h2>
       <p>Juicy grilled beef patty topped with cheddar, lettuce, tomato, and onion on a soft bun.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Beef patties</li>
-        <li>Cheddar cheese slices</li>
-        <li>Burger buns</li>
-        <li>Lettuce leaves</li>
-        <li>Tomato slices</li>
-        <li>Onion slices</li>
-        <li>Ketchup, mustard, mayo</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Grill beef patties on a medium heat until cooked to desired doneness.</li>
-        <li>Toast burger buns lightly.</li>
-        <li>Place lettuce, tomato, and onion on the bottom half of the bun.</li>
-        <li>Place the patty and a slice of cheddar cheese on top.</li>
-        <li>Top with condiments and serve with fries or salad.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 650</li>
-        <li>Protein: 28g</li>
-        <li>Carbs: 38g</li>
-        <li>Fat: 40g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Beef patties</li>
+          <li>Cheddar cheese slices</li>
+          <li>Burger buns</li>
+          <li>Lettuce leaves</li>
+          <li>Tomato slices</li>
+          <li>Onion slices</li>
+          <li>Ketchup, mustard, mayo</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Grill beef patties on a medium heat until cooked to desired doneness.</li>
+          <li>Toast burger buns lightly.</li>
+          <li>Place lettuce, tomato, and onion on the bottom half of the bun.</li>
+          <li>Place the patty and a slice of cheddar cheese on top.</li>
+          <li>Top with condiments and serve with fries or salad.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 650</li>
+          <li>Protein: 28g</li>
+          <li>Carbs: 38g</li>
+          <li>Fat: 40g</li>
+        </ul>
+      </div>
     </article>
 
+    <!-- Vegan Bibimbap -->
     <article class="recipe-card">
       <img src="Pictures/vegan-bibimbap-7.jpg" alt="Vegan Bibimbap">
       <h2>Vegan Bibimbap</h2>
       <p>Traditional Korean mixed rice bowl with sautéed vegetables, tofu, and spicy gochujang sauce.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Steamed rice</li>
-        <li>Firm tofu, cubed</li>
-        <li>Spinach</li>
-        <li>Carrot, julienned</li>
-        <li>Cucumber, sliced</li>
-        <li>Shiitake mushrooms, sliced</li>
-        <li>Bean sprouts</li>
-        <li>Gochujang sauce</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Cook the rice and set aside.</li>
-        <li>Pan-fry tofu until golden on all sides.</li>
-        <li>Sauté each vegetable separately in sesame oil, adding a pinch of salt.</li>
-        <li>In a bowl, layer rice, tofu, and vegetables neatly.</li>
-        <li>Top with a dollop of gochujang and mix before eating.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 480</li>
-        <li>Protein: 17g</li>
-        <li>Carbs: 52g</li>
-        <li>Fat: 20g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Steamed rice</li>
+          <li>Firm tofu, cubed</li>
+          <li>Spinach</li>
+          <li>Carrot, julienned</li>
+          <li>Cucumber, sliced</li>
+          <li>Shiitake mushrooms, sliced</li>
+          <li>Bean sprouts</li>
+          <li>Gochujang sauce</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Cook the rice and set aside.</li>
+          <li>Pan-fry tofu until golden on all sides.</li>
+          <li>Sauté each vegetable separately in sesame oil, adding a pinch of salt.</li>
+          <li>In a bowl, layer rice, tofu, and vegetables neatly.</li>
+          <li>Top with a dollop of gochujang and mix before eating.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 480</li>
+          <li>Protein: 17g</li>
+          <li>Carbs: 52g</li>
+          <li>Fat: 20g</li>
+        </ul>
+      </div>
     </article>
 
-        <!-- Chicken Shawarma (Halal) -->
+    <!-- Chicken Shawarma -->
     <article class="recipe-card">
       <img src="Pictures/Chicken-Shawarma-8.jpg" alt="Chicken Shawarma Wrap">
       <h2>Chicken Shawarma</h2>
       <p>Middle Eastern marinated chicken, grilled to perfection and served in a wrap with garlic sauce and pickled veggies.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Boneless chicken thighs</li>
-        <li>Yogurt</li>
-        <li>Garlic, lemon juice</li>
-        <li>Cumin, paprika, turmeric, cinnamon</li>
-        <li>Pita bread or flatbread</li>
-        <li>Pickled cucumber</li>
-        <li>Garlic sauce or tahini</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Marinate chicken with yogurt, lemon, garlic, and spices for at least 2 hours.</li>
-        <li>Grill the chicken until charred and cooked through.</li>
-        <li>Slice thinly and wrap in pita bread with pickles, garlic sauce, and lettuce.</li>
-        <li>Serve warm with a side of fries or salad.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 530</li>
-        <li>Protein: 25g</li>
-        <li>Carbs: 30g</li>
-        <li>Fat: 32g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Boneless chicken thighs</li>
+          <li>Yogurt</li>
+          <li>Garlic, lemon juice</li>
+          <li>Cumin, paprika, turmeric, cinnamon</li>
+          <li>Pita bread or flatbread</li>
+          <li>Pickled cucumber</li>
+          <li>Garlic sauce or tahini</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Marinate chicken with yogurt, lemon, garlic, and spices for at least 2 hours.</li>
+          <li>Grill the chicken until charred and cooked through.</li>
+          <li>Slice thinly and wrap in pita bread with pickles, garlic sauce, and lettuce.</li>
+          <li>Serve warm with a side of fries or salad.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 530</li>
+          <li>Protein: 25g</li>
+          <li>Carbs: 30g</li>
+          <li>Fat: 32g</li>
+        </ul>
+      </div>
     </article>
 
     <!-- Mexican Beef Tacos -->
@@ -207,58 +397,66 @@
       <img src="Pictures/birria-taco-2.jpg" alt="Mexican Beef Tacos">
       <h2>Mexican Beef Tacos</h2>
       <p>Authentic Mexican tacos filled with spiced ground beef, fresh salsa, and creamy guacamole.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Ground beef</li>
-        <li>Soft corn tortillas</li>
-        <li>Onion, garlic, chili powder, cumin</li>
-        <li>Fresh tomato salsa</li>
-        <li>Guacamole</li>
-        <li>Shredded lettuce</li>
-        <li>Cheddar cheese</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Sauté ground beef with onion, garlic, and spices until cooked.</li>
-        <li>Warm tortillas and fill them with beef mixture.</li>
-        <li>Top with salsa, guacamole, lettuce, and cheese.</li>
-        <li>Serve with lime wedges and hot sauce if desired.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 480</li>
-        <li>Protein: 20g</li>
-        <li>Carbs: 35g</li>
-        <li>Fat: 28g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Ground beef</li>
+          <li>Soft corn tortillas</li>
+          <li>Onion, garlic, chili powder, cumin</li>
+          <li>Fresh tomato salsa</li>
+          <li>Guacamole</li>
+          <li>Shredded lettuce</li>
+          <li>Cheddar cheese</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Sauté ground beef with onion, garlic, and spices until cooked.</li>
+          <li>Warm tortillas and fill them with beef mixture.</li>
+          <li>Top with salsa, guacamole, lettuce, and cheese.</li>
+          <li>Serve with lime wedges and hot sauce if desired.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 480</li>
+          <li>Protein: 20g</li>
+          <li>Carbs: 35g</li>
+          <li>Fat: 28g</li>
+        </ul>
+      </div>
     </article>
 
-    <!-- German Bratwurst with Sauerkraut -->
+    <!-- German Bratwurst & Sauerkraut -->
     <article class="recipe-card">
       <img src="Pictures/Bratwurst-and-Sauerkraut-2.jpg" alt="German Bratwurst with Sauerkraut">
       <h2>German Bratwurst & Sauerkraut</h2>
       <p>Traditional German pork sausages served with tangy sauerkraut and mustard on the side.</p>
-      <h3>Ingredients:</h3>
-      <ul>
-        <li>Bratwurst sausages</li>
-        <li>Sauerkraut</li>
-        <li>Onions</li>
-        <li>Butter</li>
-        <li>Dijon mustard</li>
-        <li>Pretzel buns (optional)</li>
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        <li>Grill or pan-fry bratwursts until browned and cooked through.</li>
-        <li>Sauté onions in butter until caramelized, add sauerkraut, and simmer.</li>
-        <li>Serve sausages with sauerkraut, mustard, and pretzel buns if desired.</li>
-        <li>Pair with German beer for an authentic experience.</li>
-      </ol>
-      <ul class="nutrition">
-        <li>Calories: 600</li>
-        <li>Protein: 22g</li>
-        <li>Carbs: 25g</li>
-        <li>Fat: 45g</li>
-      </ul>
+      <button class="expand-details-btn">View Details ▼</button>
+      <div class="recipe-details">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Bratwurst sausages</li>
+          <li>Sauerkraut</li>
+          <li>Onions</li>
+          <li>Butter</li>
+          <li>Dijon mustard</li>
+          <li>Pretzel buns (optional)</li>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+          <li>Grill or pan-fry bratwursts until browned and cooked through.</li>
+          <li>Sauté onions in butter until caramelized, add sauerkraut, and simmer.</li>
+          <li>Serve sausages with sauerkraut, mustard, and pretzel buns if desired.</li>
+          <li>Pair with German beer for an authentic experience.</li>
+        </ol>
+        <h3>Nutrition</h3>
+        <ul class="nutrition">
+          <li>Calories: 600</li>
+          <li>Protein: 22g</li>
+          <li>Carbs: 25g</li>
+          <li>Fat: 45g</li>
+        </ul>
+      </div>
     </article>
 
 
@@ -270,5 +468,16 @@
   <p><a href="https://www.freshdine.com">Visit Full Website</a></p>
 </footer>
 
+<!-- JS for dropdowns -->
+<script>
+  document.querySelectorAll('.expand-details-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const details = this.nextElementSibling;
+      const isVisible = details.style.display === 'block';
+      details.style.display = isVisible ? 'none' : 'block';
+      btn.textContent = isVisible ? 'View Details ▼' : 'Hide Details ▲';
+    });
+  });
+</script>
 </body>
 </html>

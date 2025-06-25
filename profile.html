@@ -244,6 +244,12 @@
       background: #ffe496;
       color: #244987;
     }
+    .tip {
+  color: #457bee;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
     @media (max-width: 1100px) {
       .profile-setup-dashboard { flex-direction: column; gap:18px; }
       .profile-sidebar { border-right: none; border-bottom: 1.5px solid #eaeaea; padding-right: 0; margin-bottom:22px;}
@@ -371,6 +377,11 @@
             <label for="bio" class="form-section-title">Short Bio / About You
               <textarea id="bio" name="bio" rows="3" placeholder="Tell us something about you!"></textarea>
             </label>
+            <label style="grid-column: 1 / -1;">
+           <input type="checkbox" id="terms"> I agree to the Terms and Conditions
+          </label>
+          <div id="termsHint" class="warning" style="color:red; display:none; grid-column: 1 / -1;">Please agree to the terms to continue.</div>
+
           </div>
           <button type="submit" class="profile-save-btn">Save Profile</button>
           <div id="settingsConfirm" style="display:none; color:#0b8457;background:#f4fff7;border-radius:9px;padding:9px 14px;margin-top:18px;text-align:center;border:1px solid #c2f6dd;font-size:1.07rem;">
@@ -395,6 +406,99 @@
         document.getElementById('settingsConfirm').style.display = "none";
       }, 2500);
     });
+    // Package dropdown hint (we’ll use Box Type as the package example)
+document.getElementById('box').addEventListener('change', function () {
+  const hint = document.getElementById('packageHint');
+  const value = this.value;
+  let message = '';
+
+  switch(value) {
+    case 'Family Box':
+      message = 'Great for families of 4 or more!';
+      break;
+    case 'Single Box':
+      message = 'Perfect for individuals with busy lives.';
+      break;
+    case 'Couple Box':
+      message = 'A nice treat for couples!';
+      break;
+    case 'Polyamory Box':
+      message = 'Enough food for your entire kitchen table.';
+      break;
+    case 'Bestie Box':
+      message = 'Mealtime is better with your best friends!';
+      break;
+    default:
+      message = '';
+  }
+
+  if (!document.getElementById('packageHint')) {
+    const hintDiv = document.createElement('div');
+    hintDiv.id = 'packageHint';
+    hintDiv.className = 'tip';
+    this.parentElement.appendChild(hintDiv);
+  }
+
+  document.getElementById('packageHint').textContent = message;
+});
+  const bioText = document.getElementById("bio");
+  const bioLabel = bioText.parentElement;
+
+  // Create display elements
+  const charDisplay = document.createElement("div");
+  const keyDisplay = document.createElement("div");
+
+  charDisplay.id = "charactersLeft";
+  keyDisplay.id = "lastKey";
+
+  charDisplay.style.marginTop = "5px";
+  keyDisplay.style.marginTop = "5px";
+  charDisplay.style.fontSize = "0.95rem";
+  keyDisplay.style.fontSize = "0.95rem";
+  charDisplay.style.color = "#18324b";
+  keyDisplay.style.color = "#18324b";
+
+  bioLabel.appendChild(charDisplay);
+  bioLabel.appendChild(keyDisplay);
+
+  // Function
+  function charCount(e) {
+    const maxLength = 180;
+    const input = bioText.value;
+    const charLeft = maxLength - input.length;
+    const keyPressed = e.key;
+    const ascii = keyPressed.charCodeAt(0);
+
+    charDisplay.textContent = `${charLeft} characters left`;
+    keyDisplay.textContent = `Last Key: ${keyPressed} (ASCII: ${ascii})`;
+
+    if (input.length > maxLength) {
+      bioText.value = input.substring(0, maxLength); // trim if exceeded
+    }
+  }
+
+  // Event Listener
+  bioText.addEventListener("keyup", charCount);
+// Terms checkbox validation
+document.getElementById('profileForm').addEventListener('submit', function(e) {
+  const termsChecked = document.getElementById('terms').checked;
+
+  if (!termsChecked) {
+    e.preventDefault();
+    document.getElementById('termsHint').style.display = 'block';
+    return;
+  } else {
+    document.getElementById('termsHint').style.display = 'none';
+  }
+
+  // Existing confirmation logic
+  e.preventDefault();
+  document.getElementById('settingsConfirm').style.display = "block";
+  setTimeout(() => {
+    document.getElementById('settingsConfirm').style.display = "none";
+  }, 2500);
+});
+
   </script>
 </body>
 </html>

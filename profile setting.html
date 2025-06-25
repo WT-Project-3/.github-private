@@ -284,6 +284,10 @@
           <input type="password" id="confirmPass" placeholder="Repeat new password">
           <button type="button" class="save-btn" onclick="updatePassword()">Change Password</button>
           <div class="settings-confirm" id="passConfirm">Password changed!</div>
+          <div class="section-title">Short Bio</div>
+          <textarea id="bioTextarea" rows="4" placeholder="Write a short bio... (max 180 characters)"></textarea>
+          <div id="charactersLeft">180 characters left</div>
+          <div id="lastKey" style="display: none;"></div>
         </section>
       </form>
     </main>
@@ -315,6 +319,29 @@
         document.getElementById('passConfirm').style.display = "none";
       }, 2200);
     }
+  const bio = document.getElementById("bioTextarea");
+  const charsLeft = document.getElementById("charactersLeft");
+  const lastKey = document.getElementById("lastKey");
+
+  function charCount(e) {
+    let text = bio.value;
+    if (text.length > 180) {
+      bio.value = text.substring(0, 180); // prevent extra chars
+    }
+    const remaining = 180 - bio.value.length;
+    charsLeft.textContent = `${remaining} characters left`;
+    if (e && e.key) {
+      const keyPressed = e.key;
+      const asciiCode = e.key.charCodeAt(0);
+      lastKey.textContent = `Last Key: ${keyPressed} (ASCII: ${asciiCode})`;
+      lastKey.style.display = "block"; // Show when key is pressed
+    }
+  }
+
+  bio.addEventListener("input", charCount);
+  bio.addEventListener("keydown", charCount);
+</script>
+
   </script>
 </body>
 </html>

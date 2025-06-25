@@ -34,6 +34,57 @@
       font-weight: 700;
       letter-spacing: 1px;
     }
+    .nav-header {
+  background-color: #244987;
+  padding: 10px 20px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  flex-shrink: 0;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto;
+}
+
+.nav-links ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.cta-btn {
+  background-color: #ffd166;
+  color: #18324b !important;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
     .fav-container {
       max-width: 1120px;
       margin: 36px auto;
@@ -199,15 +250,28 @@
   </style>
 </head>
 <body>
-  <header>
-    Your Favorite Recipes
-  </header>
-  <div class="fav-container">
-    <div class="fav-heading">
+
+ <header class="nav-header">
+  <div class="nav-container">
+    <div class="logo-container">
+      <img src="Pictures/photo_2025-05-15_12-16-12.jpg" alt="FreshDine Logo" class="logo-img">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="Homepage.html">Home</a></li>
+        <li><a href="meal planning.html">Meal Plans</a></li>
+        <li><a href="favourite.html">Favorite</a></li>
+        <li><a href="shopping basket.html">Cart</a></li>
+        <li><a href="Contact us page.html">Contact</a></li>
+        <li><a href="meal planning.html" class="cta-btn">Explore</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+   <div class="fav-heading">
       <strong>Tip:</strong> Add your favorite recipes to your basket for easy checkout! <br>
       Don’t forget to grab what you love—freshness is just a click away.
     </div>
-
     <!-- Controls: Sort, Category, Status -->
     <div class="fav-controls-row">
       <div class="fav-control">

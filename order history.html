@@ -302,7 +302,7 @@
         </select>
         <input type="text" placeholder="Home, 1065 6th Ave...">
         <input type="text" placeholder="e.g. Sushi, pasta">
-        <button class="fd-btn">Find food</button>
+        <a href="recipe discovery.html" class="fd-btn" style="text-decoration: none;">Find food</a>
       </div>
       <div class="banner-links">
         <a href="#">Delivery</a> | 
@@ -313,7 +313,7 @@
       </div>
     </div>
   </section>
-
+     <ul id="cart-items"></ul>
   <!-- ORDER HISTORY -->
   <section class="order-history-section">
     <div class="order-history-header">
@@ -332,7 +332,7 @@
         <div class="order-date">May 24, 2025<br>DELIVERY to 1065 6th Ave, Berlin</div>
         <div class="order-type">DELIVERY</div>
         <div class="order-actions">
-          <a href="#">Reorder now</a>
+          <a href="checkout.html?dish=vegan-delight">Reorder now</a>
           <div class="order-icons">
             <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
             <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
@@ -348,7 +348,7 @@
         <div class="order-date">May 10, 2025<br>PICKUP at Alexanderplatz, Berlin</div>
         <div class="order-type">DELIVERY</div>
         <div class="order-actions">
-          <a href="#">Reorder now</a>
+          <a href="checkout.html?dish=vegan-delight">Reorder now</a>
           <div class="order-icons">
             <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
             <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
@@ -380,7 +380,7 @@
         <div class="order-date">April 30, 2025<br>PICKUP at 6 River Rd, Frankfurt</div>
         <div class="order-type">PICKUP</div>
         <div class="order-actions">
-          <a href="#">Reorder now</a>
+          <a href="checkout.html?dish=vegan-delight">Reorder now</a>
           <div class="order-icons">
             <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" class="icon" title="Bookmark" alt="Bookmark">
             <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" title="More options" alt="More">
@@ -390,6 +390,37 @@
     </div>
     <a href="#" class="view-past-link">View your past orders</a>
   </section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    const dish = params.get("dish");
+
+    if (dish) {
+      const cart = document.querySelector(".checkout-cart-summary") || document.querySelector(".shopping-cart") || document.querySelector("#cart");
+      const message = document.createElement("p");
+      message.style.background = "#e7f5e1";
+      message.style.padding = "12px";
+      message.style.border = "1px solid #b6e2ad";
+      message.style.borderRadius = "6px";
+      message.style.color = "#244987";
+      message.style.fontWeight = "500";
+      message.textContent = `✅ "${dish.replace("-", " ").toUpperCase()}" has been added to your cart.`;
+
+      if (cart) {
+        cart.prepend(message);
+      } else {
+        document.body.prepend(message);
+      }
+    }
+  });
+  const cartList = document.querySelector("#cart-items");
+if (cartList) {
+  const li = document.createElement("li");
+  li.textContent = dish.replace("-", " ").toUpperCase();
+  cartList.appendChild(li);
+}
+
+</script>
 
 </body>
 </html>

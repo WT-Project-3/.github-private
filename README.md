@@ -64,11 +64,3 @@ FreshDine allows users to:
 3. View detailed cooking instructions
 4. Plan meals for the week
 5. Proceed to a simulated checkout and delivery process
-
----
-
-## 🖼️ Screenshots
-
-_Add your screenshots here (homepage, recipes page, planner, etc.)_
-
-Example:

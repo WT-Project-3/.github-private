@@ -224,5 +224,4 @@ Replace each placeholder with final image links when assets are ready.
 
 ## License
 
-No license file is currently defined in this repository.  
-Add a project license if you intend to distribute or reuse this work publicly.
+Mit

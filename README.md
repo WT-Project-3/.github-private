@@ -194,7 +194,7 @@ It can serve as:
 ## Current Limitations
 
 - Static prototype: no persistent authentication, database, or order backend
-- Some navigation references are inconsistent (for example `contact.html`, `about.html`, `favorite.html`, and `recipe-discovery.html` appear in specific files)
+- Some pages contain links to non-existent filename variants (for example `contact.html`, `about.html`, `favorite.html`, and `recipe-discovery.html`) instead of the existing files in this repository
 - No automated tests or CI checks are defined for this prototype
 - Payment and checkout are simulation-only
 

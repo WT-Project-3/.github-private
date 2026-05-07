@@ -194,7 +194,7 @@ It can serve as:
 ## Current Limitations
 
 - Static prototype: no persistent authentication, database, or order backend
-- Some navigation references are inconsistent (`contact.html`/`about.html` links appear in specific files)
+- Some navigation references are inconsistent (for example `contact.html`, `about.html`, `favorite.html`, and `recipe-discovery.html` appear in specific files)
 - No automated tests or CI checks are defined for this prototype
 - Payment and checkout are simulation-only
 
@@ -214,11 +214,11 @@ It can serve as:
 
 Use this section to insert product screenshots for portfolio and stakeholder communication.
 
-![FreshDine Homepage Placeholder](docs/images/homepage-placeholder.png)
-![FreshDine Meal Planning Placeholder](docs/images/meal-planning-placeholder.png)
-![FreshDine Checkout Placeholder](docs/images/checkout-placeholder.png)
+- [Image Placeholder: Homepage experience screenshot]
+- [Image Placeholder: Meal planning experience screenshot]
+- [Image Placeholder: Checkout flow screenshot]
 
-If these files do not exist yet, keep the placeholders and replace them once screenshots are prepared.
+Replace each placeholder with final image links when assets are ready.
 
 ---
 
